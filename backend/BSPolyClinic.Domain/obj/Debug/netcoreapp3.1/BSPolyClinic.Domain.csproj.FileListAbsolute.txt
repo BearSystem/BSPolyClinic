@@ -1,0 +1,12 @@
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.AssemblyInfoInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.AssemblyInfo.cs
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.csproj.CoreCompileInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\bin\Debug\netcoreapp3.1\BSPolyClinic.Domain.deps.json
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\bin\Debug\netcoreapp3.1\BSPolyClinic.Domain.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\bin\Debug\netcoreapp3.1\BSPolyClinic.Domain.pdb
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.pdb
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\bin\Debug\netcoreapp3.1\BSPolyClinic.Shared.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\bin\Debug\netcoreapp3.1\BSPolyClinic.Shared.pdb
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.csprojAssemblyReference.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Domain\obj\Debug\netcoreapp3.1\BSPolyClinic.Domain.csproj.CopyComplete

@@ -1,0 +1,9 @@
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\bin\Debug\netcoreapp3.1\BSPolyClinic.Shared.deps.json
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\bin\Debug\netcoreapp3.1\BSPolyClinic.Shared.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\bin\Debug\netcoreapp3.1\BSPolyClinic.Shared.pdb
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.csprojAssemblyReference.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.AssemblyInfoInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.AssemblyInfo.cs
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.csproj.CoreCompileInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Shared\obj\Debug\netcoreapp3.1\BSPolyClinic.Shared.pdb

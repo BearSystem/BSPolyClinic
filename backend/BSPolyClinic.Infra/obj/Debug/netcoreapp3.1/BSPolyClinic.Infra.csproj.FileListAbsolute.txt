@@ -1,0 +1,8 @@
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\bin\Debug\netcoreapp3.1\BSPolyClinic.Infra.deps.json
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\bin\Debug\netcoreapp3.1\BSPolyClinic.Infra.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\bin\Debug\netcoreapp3.1\BSPolyClinic.Infra.pdb
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\obj\Debug\netcoreapp3.1\BSPolyClinic.Infra.AssemblyInfoInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\obj\Debug\netcoreapp3.1\BSPolyClinic.Infra.AssemblyInfo.cs
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\obj\Debug\netcoreapp3.1\BSPolyClinic.Infra.csproj.CoreCompileInputs.cache
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\obj\Debug\netcoreapp3.1\BSPolyClinic.Infra.dll
+C:\Projetos\BearSystems\BSPolyClinic\BSPolyClinic.Infra\obj\Debug\netcoreapp3.1\BSPolyClinic.Infra.pdb
