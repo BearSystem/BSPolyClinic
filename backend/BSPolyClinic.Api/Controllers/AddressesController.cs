@@ -10,7 +10,7 @@ namespace BSPolyClinic.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdressesController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         // GET: api/<AdressesController>
         [HttpGet]
