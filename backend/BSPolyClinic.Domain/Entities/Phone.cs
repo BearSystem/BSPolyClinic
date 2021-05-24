@@ -22,5 +22,10 @@ namespace BSPolyClinic.Domain.Entities
         {
             Observation = observation;
         }
+
+        public void AlterTypePhone(EPhoneType type)
+        {
+            Type = type;
+        }
     }
 }

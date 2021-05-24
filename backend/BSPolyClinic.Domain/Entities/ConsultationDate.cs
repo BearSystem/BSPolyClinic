@@ -23,6 +23,7 @@ namespace BSPolyClinic.Domain.Entities
         public DateTime ConsultationDay { get; private set; }
         public string Hour { get; private set; }
         public bool Checked { get; private set; }
+       
 
         public void MakingAnAppointment(User patient)
         {
@@ -32,8 +33,11 @@ namespace BSPolyClinic.Domain.Entities
 
         public void ClearConsultation()
         {
-            PatientId = "";
-            Checked = false;
+
+            if(ConsultationDay >= DateTime.Now)
+                PatientId = "";
+                Checked = false;
+
         }
     }
 }

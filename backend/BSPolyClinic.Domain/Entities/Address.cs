@@ -31,6 +31,11 @@ namespace BSPolyClinic.Domain.Entities
         public string ZipCode { get; private set; }
         public EAddressType Type { get; private set; }
 
+        public void AlterAddressType(EAddressType eAddressType)
+        {
+            Type = eAddressType;
+        }
+
         public override string ToString()
         {
             return $"{Street}, {Number} - {City}/{State}";

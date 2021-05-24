@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BSPolyClinic.Domain.Enums
 {
-    public class EMedicalSpeciality
+    public enum EMedicalSpeciality
     {
 
     }

@@ -7,6 +7,13 @@ namespace BSPolyClinic.Domain.Entities.Users
 {
     public class Attendant : Entity
     {
+        public Attendant(Guid userId, Guid healthCenterId, string codigo)
+        {
+            UserId = userId;
+            HealthCenterId = healthCenterId;
+            Codigo = codigo;
+        }
+
         public Guid UserId { get; private set; }
         public Guid HealthCenterId { get; private set; }
         public string Codigo { get; private set; }
