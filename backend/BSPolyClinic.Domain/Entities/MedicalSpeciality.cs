@@ -1,27 +1,25 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Domain.Enums;
-using BSPolyClinic.Shared.Entities;
+﻿using BSPolyClinic.Shared.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
-    public class Consultation : Entity
+    public class MedicalSpeciality : Entity
     {
-        public Consultation(Guid doctorId, Guid healthCenterId, bool active)
+        public MedicalSpeciality(string title)
         {
-            DoctorId = doctorId;
-            HealthCenterId = healthCenterId;
-            Active = active;
+            Title = title;
+            Active = true;
         }
 
-        public Guid DoctorId { get; private set; }
-        public MedicalSpeciality Speciality { get; private set; }
-        public Guid HealthCenterId { get; private set; }
+        public string Title { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }
         public bool Active { get; private set; }
+
 
         public void ActivateConultation()
         {
