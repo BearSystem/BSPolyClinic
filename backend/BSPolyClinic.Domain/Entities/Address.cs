@@ -29,7 +29,13 @@ namespace BSPolyClinic.Domain.Entities
         public string State { get; private set; }
         public string Country { get; private set; }
         public string ZipCode { get; private set; }
+        public string Description { get; private set; }
         public EAddressType Type { get; private set; }
+
+        public void InsertDescription(string description)
+        {
+            Description = description;
+        }
 
         public void AlterAddressType(EAddressType eAddressType)
         {

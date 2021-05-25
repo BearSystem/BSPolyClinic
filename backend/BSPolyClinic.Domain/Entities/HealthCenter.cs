@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Shared.Entities;
+﻿using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ namespace BSPolyClinic.Domain.Entities
         public string Observation { get; private set; }
         public Phone Phone { get; private set; }
         public Address Address { get; private set; }
+
+
+        public Doctor Doctor { get; private set; }
+        public Attendant Attendant { get; private set; }
+        public Patient Patient { get; private set; }
+        public Nurse Nurse { get; private set; }
+        public Manager Manager { get; private set; }
 
         public void IncludeDescription(string description)
         {

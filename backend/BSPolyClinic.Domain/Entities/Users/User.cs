@@ -27,6 +27,17 @@ namespace BSPolyClinic.Domain.Entities.Users
         public Email Emails { get; private set; }
         public Document Document { get; private set; }
         public EUserType UserType { get; private set; }
+        public byte[] Foto { get; set; }
+
+        public Administrator Administrator { get; private set; }
+        public Attendant Attendant { get; private set; }
+        public Manager Manager { get; private set; }
+        public Patient Patient { get; private set; }
+        public Doctor Doctor { get; private set; }
+        public Nurse Nurse { get; private set; }
+
+
+
 
         public IReadOnlyCollection<Address> Addresses => _addresses.ToArray();
 
