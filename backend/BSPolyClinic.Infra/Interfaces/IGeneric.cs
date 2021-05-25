@@ -16,9 +16,8 @@ namespace BSPolyClinic.Infra.Interfaces
         Task Insert(List<TEntity> entity);
 
         Task Update(TEntity entity);
-        Task Update(List<TEntity> entity);
 
         Task Excluir(Guid id);
-        Task Excluir(List<TEntity> entity);
+        Task Excluir(TEntity entity);
     }
 }

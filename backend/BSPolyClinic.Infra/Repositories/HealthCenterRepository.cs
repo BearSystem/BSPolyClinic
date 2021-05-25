@@ -10,5 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class HealthCenterRepository : GenericRepository<HealthCenter>, IHealthCenter
     {
+        public HealthCenterRepository(Context context) : base(context)
+        {
+        }
     }
 }

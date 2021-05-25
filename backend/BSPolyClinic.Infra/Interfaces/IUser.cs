@@ -18,6 +18,8 @@ namespace BSPolyClinic.Infra.Interfaces
 
         Task SignIn(User user, bool lembrar);
 
+        Task<User> findUserById(string id);
+
         Task<User> GetUserByEmail(string email);
 
         Task<IList<string>> GetUserRole(User user);

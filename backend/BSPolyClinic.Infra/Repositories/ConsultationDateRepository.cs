@@ -10,5 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class ConsultationDateRepository : GenericRepository<ConsultationDate>, IConsultationDate
     {
+        public ConsultationDateRepository(Context context) : base(context)
+        {
+        }
     }
 }

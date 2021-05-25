@@ -1,4 +1,5 @@
 ﻿using BSPolyClinic.Infra.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,44 +10,104 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class GenericRepository<TEntity> : IGeneric<TEntity> where TEntity : class
     {
-        public Task Excluir(Guid id)
+        private readonly Context _context;
+
+        public GenericRepository(Context context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task Excluir(List<TEntity> entity)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = await findById(id);
+                _context.Set<TEntity>().Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task Excluir(TEntity entity)
+        {
+            try
+            {
+                _context.Set<TEntity>().Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IQueryable<TEntity> findAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Set<TEntity>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<TEntity> findById(Guid id)
+        public async Task<TEntity> findById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = await _context.Set<TEntity>().FindAsync(id);
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task Insert(TEntity entity)
+        public async Task Insert(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.AddAsync(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task Insert(List<TEntity> entity)
+        public async Task Insert(List<TEntity> entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.AddRangeAsync(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = _context.Set<TEntity>().Update(entity);
+                result.State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task Update(List<TEntity> entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -10,6 +10,10 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class JobRepository : GenericRepository<Job>, IJob
     {
+        public JobRepository(Context context) : base(context)
+        {
+        }
+
         public IQueryable<Job> FiltrarFuncoes(string nameJob)
         {
             throw new NotImplementedException();

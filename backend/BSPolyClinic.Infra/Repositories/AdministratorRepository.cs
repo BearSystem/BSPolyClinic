@@ -10,5 +10,10 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class AdministratorRepository : GenericRepository<Administrator>, IAdministrator
     {
+        private readonly Context context;
+        public AdministratorRepository(Context context) : base(context)
+        {
+            this.context = context;
+        }
     }
 }

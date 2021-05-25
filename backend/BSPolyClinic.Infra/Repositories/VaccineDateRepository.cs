@@ -10,5 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class VaccineDateRepository : GenericRepository<VaccineDate>, IVaccineDate
     {
+        public VaccineDateRepository(Context context) : base(context)
+        {
+        }
     }
 }

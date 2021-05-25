@@ -10,5 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class ManagerRepository : GenericRepository<Manager>, IManager
     {
+        public ManagerRepository(Context context) : base(context)
+        {
+        }
     }
 }

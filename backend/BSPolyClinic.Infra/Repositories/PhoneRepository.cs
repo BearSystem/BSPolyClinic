@@ -10,5 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class PhoneRepository : GenericRepository<Phone>, IPhone
     {
+        public PhoneRepository(Context context) : base(context)
+        {
+        }
     }
 }

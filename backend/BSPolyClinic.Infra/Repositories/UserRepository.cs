@@ -1,6 +1,7 @@
 ﻿using BSPolyClinic.Domain.Entities.Users;
 using BSPolyClinic.Infra.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,39 +12,111 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class UserRepository : GenericRepository<User>, IUser
     {
-        public Task<IdentityResult> CreateUser(User user, string senha)
+        private readonly Context context;
+        private readonly UserManager<User> usersManager;
+        private readonly SignInManager<User> loginManager;
+
+        public UserRepository(Context context, UserManager<User> usersManager, SignInManager<User> loginManager) : base(context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+            this.usersManager = usersManager;
+            this.loginManager = loginManager;
         }
 
-        public Task<int> GetQuantityRegisteredUresrs()
+        public async Task<IdentityResult> CreateUser(User user, string senha)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await usersManager.CreateAsync(user, senha);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<User> GetUserByEmail(string email)
+        public async Task<User> findUserById(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await usersManager.FindByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<IList<string>> GetUserRole(User user)
+        public async Task<int> GetQuantityRegisteredUresrs()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Users.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task IncludeUserInRole(User user, string funcao)
+        public async Task<User> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await usersManager.FindByEmailAsync(email);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task SignIn(User user, bool lembrar)
+        public async Task<IList<string>> GetUserRole(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await usersManager.GetRolesAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task UpdateUser(User user)
+        public async Task IncludeUserInRole(User user, string funcao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await usersManager.AddToRoleAsync(user, funcao);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task SignIn(User user, bool lembrar)
+        {
+            try
+            {
+                await loginManager.SignInAsync(user, lembrar);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateUser(User user)
+        {
+            try
+            {
+                await usersManager.UpdateAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

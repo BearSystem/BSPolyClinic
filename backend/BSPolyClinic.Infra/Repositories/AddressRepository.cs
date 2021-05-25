@@ -10,6 +10,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class AddressRepository : GenericRepository<Address>, IAddress
     {
-
+        public AddressRepository(Context context) : base(context)
+        {
+        }
     }
 }
