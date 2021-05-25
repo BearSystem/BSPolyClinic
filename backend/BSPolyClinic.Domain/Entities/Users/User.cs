@@ -12,18 +12,22 @@ namespace BSPolyClinic.Domain.Entities.Users
     {
 
         private readonly IList<Address> _addresses;
+        private readonly IList<Phone> _phones;
 
-        public User(Name name,Document document,Email email,Phone phone)
+        public User()
+        {
+        }
+
+        public User(Name name,Document document,Email email)
         {
             Name = name;
             Document = document;
             Emails = email;
-            Phones = phone;
             _addresses = new List<Address>();
+            _phones = new List<Phone>();
         }
 
         public Name Name { get; private set; }
-        public Phone Phones { get; private set; }
         public Email Emails { get; private set; }
         public Document Document { get; private set; }
         public EUserType UserType { get; private set; }
@@ -32,13 +36,15 @@ namespace BSPolyClinic.Domain.Entities.Users
         public Administrator Administrator { get; private set; }
         public Attendant Attendant { get; private set; }
         public Manager Manager { get; private set; }
-        public Patient Patient { get; private set; }
+
+        public IEnumerable<Patient> Patient { get; set; }
+
         public Doctor Doctor { get; private set; }
+
         public Nurse Nurse { get; private set; }
 
 
-
-
+        public IReadOnlyCollection<Phone> Phones => _phones.ToArray();
         public IReadOnlyCollection<Address> Addresses => _addresses.ToArray();
 
         public void AlterDocument(Document document)
@@ -55,6 +61,13 @@ namespace BSPolyClinic.Domain.Entities.Users
         {
             _addresses.Add(address);
         }
+        
+
+        public void AddPhones(Phone phone)
+        {
+            _phones.Add(phone);
+        }
+
 
         public override string ToString()
         {

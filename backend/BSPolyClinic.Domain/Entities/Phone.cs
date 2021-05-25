@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Domain.Enums;
+﻿using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Shared.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,14 @@ namespace BSPolyClinic.Domain.Entities
         public string Telephone { get; private set; }
         public string Observation { get; private set; }
         public EPhoneType Type { get; private set; }
+
+
+        public string UserId { get; set; }
+        public IEnumerable<User> User { get; set; }
+
+
+        public Guid HealthCenterId { get; set; }
+        public IEnumerable<HealthCenter> HealthCenter { get; set; }
 
         public void IncludeNote(string observation)
         {

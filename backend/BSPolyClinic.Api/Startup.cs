@@ -1,7 +1,12 @@
+using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Infra;
+using BSPolyClinic.Infra.Interfaces;
+using BSPolyClinic.Infra.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +31,30 @@ namespace BSPolyClinic.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<Context>(opcoes => opcoes.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, Job>().AddEntityFrameworkStores<Context>();
+
+
+            services.AddScoped<IAddress, AddressRepository>();
+            services.AddScoped<IAdministrator, AdministratorRepository>();
+            services.AddScoped<IAttendant, AttendantRepository>();
+            services.AddScoped<IConsultation, ConsultationRepository>();
+            services.AddScoped<IConsultationDate, ConsultationDateRepository>();
+            services.AddScoped<IDoctor, DoctorRepository>();
+            services.AddScoped<IHealthCenter, HealthCenterRepository>();
+            services.AddScoped<IJob, JobRepository>();
+            services.AddScoped<IManager, ManagerRepository>();
+            services.AddScoped<IMedicalSpeciality, MedicalSpecialityRepository>();
+            services.AddScoped<INurse, NurseRepository>();
+            services.AddScoped<IPatient, PatientRepository>();
+            services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<IVaccine, VaccineRepository>();
+            services.AddScoped<IVaccineDate, VaccineDateRepository>();
+
+
+            services.AddCors();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

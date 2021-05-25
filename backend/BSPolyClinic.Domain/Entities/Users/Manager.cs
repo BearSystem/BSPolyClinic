@@ -10,7 +10,7 @@ namespace BSPolyClinic.Domain.Entities.Users
     {
         private readonly IList<HealthCenter> _healthCenter;
 
-        public Manager(Guid userId, string code)
+        public Manager(string userId, string code)
         {
             UserId = userId;
             Code = code;
@@ -18,7 +18,7 @@ namespace BSPolyClinic.Domain.Entities.Users
         }
         public string Code { get; private set; }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
         public User User { get; private set; }
 
         public IReadOnlyCollection<HealthCenter> HealthCenter => _healthCenter.ToArray();

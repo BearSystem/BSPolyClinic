@@ -13,7 +13,24 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Vaccine> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("Vaccine");
+
+            builder.HasKey(v => v.Id);
+
+            builder.Property(v => v.Title);
+            builder.Property(v => v.Description);
+            builder.Property(v => v.Observation);
+            builder.Property(v => v.Active);
+            builder.Property(v => v.MinimumAge);
+            
+            builder.Property(v => v.InitialDate);
+            builder.Property(v => v.FinalDate);
+
+            builder.HasOne(x => x.HealthCenter).WithMany(x => x.Vaccine).OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.Property(a => a.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(e => e.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

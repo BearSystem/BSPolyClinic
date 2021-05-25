@@ -21,8 +21,14 @@ namespace BSPolyClinic.Domain.Entities
         public string Observation { get; private set; }
         public bool Active { get; private set; }
 
+        public Guid DoctorId { get; set; }
         public Doctor Doctor { get; set; }
+
+        public Guid HealthCenterId { get; set; }
         public HealthCenter HealthCenter { get; set; }
+
+        public Guid ConsultationId { get; set; }
+        public Consultation Consultation { get; set; }
 
 
         public void ActivateConultation()

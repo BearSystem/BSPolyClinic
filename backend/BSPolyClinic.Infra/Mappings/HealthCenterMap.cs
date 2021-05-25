@@ -13,7 +13,21 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<HealthCenter> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("HealthCenter");
+
+            builder.HasKey(h => h.Id);
+
+            builder.HasOne(a => a.Phone).WithMany(b => b.HealthCenter).OnDelete(DeleteBehavior.NoAction);
+            
+            
+            builder.HasOne(a => a.Address).WithMany(b => b.HealthCenter).OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(h => h.Description);
+            builder.Property(h => h.Observation);
+
+
+            builder.Property(a => a.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(e => e.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

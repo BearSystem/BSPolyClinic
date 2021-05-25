@@ -7,6 +7,10 @@ namespace BSPolyClinic.Domain.Entities
 {
     public class Vaccine : Entity
     {
+        public Vaccine()
+        {
+        }
+
         public Vaccine(string title, int minimumAge, string description, string observations, DateTime initialDate, DateTime finalDate, bool active)
         {
             Title = title;
@@ -24,7 +28,12 @@ namespace BSPolyClinic.Domain.Entities
         public bool Active { get; private set; }
         public DateTime InitialDate { get; private set; }
         public DateTime FinalDate { get; private set; }
+
+        public Guid VaccineDateId { get; private set; }
+        public IEnumerable<VaccineDate> VaccineDate { get; set; }
+
         public Guid HealthCenterId { get; private set; }
+        public HealthCenter HealthCenter { get; private set; }
 
         public void ActivateVaccine()
         {

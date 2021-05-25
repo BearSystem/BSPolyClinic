@@ -7,15 +7,13 @@ namespace BSPolyClinic.Domain.Entities.Users
 {
     public class Administrator : Entity
     {
-        public Administrator(User user,Guid userId, string codigo)
+        public Administrator(string userId)
         {
-            User = user;
             UserId = userId;
-            Codigo = codigo;
         }
 
         public User User { get; private set; }
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
         public string Codigo { get; private set; }
     }
 }

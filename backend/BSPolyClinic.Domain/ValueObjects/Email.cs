@@ -7,6 +7,10 @@ namespace BSPolyClinic.Domain.ValueObjects
 {
     public class Email : BaseVO
     {
+        public Email()
+        {
+
+        }
         public Email(string address)
         {
             Address = address;

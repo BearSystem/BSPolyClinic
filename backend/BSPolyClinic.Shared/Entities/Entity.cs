@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BSPolyClinic.Shared.Entities
 {
-    public class Entity : Notifiable
+    public class Entity
     {
         public Entity()
         {

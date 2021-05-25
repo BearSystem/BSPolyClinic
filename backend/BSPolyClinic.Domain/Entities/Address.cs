@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Domain.Enums;
+﻿using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Shared.Entities;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,13 @@ namespace BSPolyClinic.Domain.Entities
         public string ZipCode { get; private set; }
         public string Description { get; private set; }
         public EAddressType Type { get; private set; }
+
+
+        public Guid HealthCenterId { get; set; }
+        public IEnumerable<HealthCenter> HealthCenter { get; set; }
+        public string UserId { get; set; }
+        public IEnumerable<User> User { get; set; }
+
 
         public void InsertDescription(string description)
         {

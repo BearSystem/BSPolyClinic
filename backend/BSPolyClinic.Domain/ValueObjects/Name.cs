@@ -8,6 +8,10 @@ namespace BSPolyClinic.Domain.ValueObjects
 {
     public class Name : BaseVO
     {
+        public Name()
+        {
+
+        }
         public Name(string firstName, string lastName)
         {
             FirstName = firstName;

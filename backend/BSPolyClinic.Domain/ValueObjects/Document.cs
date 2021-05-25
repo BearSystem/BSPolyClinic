@@ -7,6 +7,10 @@ namespace BSPolyClinic.Domain.ValueObjects
 {
     public class Document : BaseVO
     {
+        public Document()
+        {
+
+        }
         public Document(string cpf, string rg, string numberSUS)
         {
             CPF = cpf;

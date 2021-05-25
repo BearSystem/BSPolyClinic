@@ -9,14 +9,14 @@ namespace BSPolyClinic.Domain.Entities.Users
     public class Attendant : Entity
     {
         private readonly IList<HealthCenter> _healthCenter;
-        public Attendant(Guid userId, string code)
+        public Attendant(string userId, string code)
         {
             UserId = userId;
             Code = code;
             _healthCenter = new List<HealthCenter>();
         }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
         public User User { get; private set; }
 
         public IReadOnlyCollection<HealthCenter> HealthCenter => _healthCenter.ToArray();
