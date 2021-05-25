@@ -59,19 +59,38 @@ namespace BSPolyClinic.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BSPolyClinic.Api", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Bear System Poly Clinic",
+                        Version = "v1",
+                        Description = "API REST para clínica médica. <br/> " +
+                        "<h5>" +
+                        "<ol>" +
+                        "  <li>Consultas médicas</li>" +
+                        "  <li>Agendar vacinação</li>" +
+                        "  <li>Cadastro de Pacientes</li>" +
+                        "</ol>" +
+                        "</h5>",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Kägi Carvalho",
+                            Url = new Uri("https://github.com/kagicarvalho")
+                        }
+                    });
             });
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BSPolyClinic.Api v1"));
             }
+
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BSPolyClinic.Api v1"));
 
             app.UseHttpsRedirection();
 
