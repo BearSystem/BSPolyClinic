@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentValidator;
+using FluentValidator.Validation;
 
 namespace BSPolyClinic.Domain.ValueObjects
 {
-    public class Document : BaseVO
+    public class Document : Notifiable
     {
         public Document()
         {
@@ -20,6 +22,10 @@ namespace BSPolyClinic.Domain.ValueObjects
             CPF = cpf;
             RG = rg;
             NumberSUS = numberSUS;
+
+            AddNotifications(new ValidationContract()
+                .IsTrue(Validate(CPF), "Document", "CPF inválido")
+            );
         }
         
 

@@ -10,10 +10,9 @@ namespace BSPolyClinic.Domain.Entities.Users
     {
         private readonly IList<HealthCenter> _healthCenter;
 
-        public Nurse(string userId, string code)
+        public Nurse(string userId)
         {
             UserId = userId;
-            Code = code;
             _healthCenter = new List<HealthCenter>();
         }
 

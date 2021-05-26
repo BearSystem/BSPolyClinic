@@ -76,6 +76,7 @@ namespace BSPolyClinic.Api.Controllers
 
                 if (await userRepository.GetQuantityRegisteredUresrs() == 0)
                 {
+                    singUpUser.TypeUser = EUserType.Administrator;
                     userRole = "Administrator";
                 }
                 else

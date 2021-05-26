@@ -15,6 +15,16 @@ namespace BSPolyClinic.Shared.Entities
         public Guid Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
-        
+
+        public void AddCreatedDate()
+        {
+            CreatedAt = DateTime.Now.Date;
+        }
+
+        public void AddUpdatedDate()
+        {
+            UpdatedAt = DateTime.Now.Date;
+        }
+
     }
 }

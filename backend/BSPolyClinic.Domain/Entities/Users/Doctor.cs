@@ -12,10 +12,9 @@ namespace BSPolyClinic.Domain.Entities.Users
         private readonly IList<MedicalSpeciality> _speciality;
         private readonly IList<HealthCenter> _healthCenter;
 
-        public Doctor(string userId, string crm)
+        public Doctor(string userId)
         {
             UserId = userId;
-            Crm = crm;
             _speciality = new List<MedicalSpeciality>();
             _healthCenter = new List<HealthCenter>();
         }

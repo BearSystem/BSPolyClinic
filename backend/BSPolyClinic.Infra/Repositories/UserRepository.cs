@@ -1,4 +1,5 @@
 ﻿using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Infra.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,56 @@ namespace BSPolyClinic.Infra.Repositories
         {
             try
             {
-                return await usersManager.CreateAsync(user, senha);
+                var newUser = await usersManager.CreateAsync(user, senha);
+
+                switch (user.UserType)
+                {
+                    case EUserType.Administrator:
+                        var administrator = new Administrator(user.Id);
+                        administrator.AddCreatedDate();
+                        administrator.AddUpdatedDate();
+
+                        context.Administrators.Add(administrator);
+                        break;
+                    case EUserType.Manager:
+                        var manager = new Manager(user.Id);
+                        manager.AddCreatedDate();
+                        manager.AddUpdatedDate();
+
+                        context.Managers.Add(manager);
+                        break;
+                    case EUserType.Doctor:
+                        var doctor = new Doctor(user.Id);
+                        doctor.AddCreatedDate();
+                        doctor.AddUpdatedDate();
+
+                        context.Doctors.Add(doctor);
+                        break;
+                    case EUserType.Nurse:
+                        var nurse = new Nurse(user.Id);
+                        nurse.AddCreatedDate();
+                        nurse.AddUpdatedDate();
+
+                        context.Nurses.Add(nurse);
+                        break;
+                    case EUserType.Attendant:
+                        var attendant = new Attendant(user.Id);
+                        attendant.AddCreatedDate();
+                        attendant.AddUpdatedDate();
+
+                        context.Attendants.Add(attendant);
+                        break;
+                    default:
+                        var patient = new Patient(user.Id);
+                        patient.AddCreatedDate();
+                        patient.AddUpdatedDate();
+
+                        context.Patients.Add(patient);
+                        break;
+                }
+                context.SaveChanges();
+
+                return newUser;
             }
             catch (Exception ex)
             {
