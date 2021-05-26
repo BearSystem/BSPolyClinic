@@ -18,11 +18,12 @@ namespace BSPolyClinic.Domain.Entities.Users
         {
         }
 
-        public User(Name name,Document document,Email email)
+        public User(Name name,Document document,Email email, EUserType userType)
         {
             Name = name;
             Document = document;
             Emails = email;
+            UserType = userType;
             _addresses = new List<Address>();
             _phones = new List<Phone>();
         }
@@ -37,7 +38,7 @@ namespace BSPolyClinic.Domain.Entities.Users
         public Attendant Attendant { get; private set; }
         public Manager Manager { get; private set; }
 
-        public IEnumerable<Patient> Patient { get; set; }
+        public Patient Patient { get; set; }
 
         public Doctor Doctor { get; private set; }
 
@@ -62,6 +63,10 @@ namespace BSPolyClinic.Domain.Entities.Users
             _addresses.Add(address);
         }
         
+        public void AddEmails(Email email)
+        {
+            Emails = email;
+        }
 
         public void AddPhones(Phone phone)
         {

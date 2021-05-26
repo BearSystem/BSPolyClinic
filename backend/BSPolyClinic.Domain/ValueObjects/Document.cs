@@ -9,14 +9,19 @@ namespace BSPolyClinic.Domain.ValueObjects
     {
         public Document()
         {
-
         }
+        public Document(string cpf)
+        {
+            CPF = cpf;
+        }
+
         public Document(string cpf, string rg, string numberSUS)
         {
             CPF = cpf;
             RG = rg;
             NumberSUS = numberSUS;
         }
+        
 
         public string CPF { get; private set; }
         public string RG { get; private set; }

@@ -1,7 +1,9 @@
+using BSPolyClinic.Api.Security;
 using BSPolyClinic.Domain.Entities.Users;
 using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using BSPolyClinic.Infra.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,10 +13,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BSPolyClinic.Api
@@ -53,10 +57,17 @@ namespace BSPolyClinic.Api
             services.AddScoped<IVaccine, VaccineRepository>();
             services.AddScoped<IVaccineDate, VaccineDateRepository>();
 
-
             services.AddCors();
 
+            services.AddSpaStaticFiles(diretorio =>
+            {
+                //diretorio.RootPath = "";
+            });
+
             services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
@@ -79,7 +90,36 @@ namespace BSPolyClinic.Api
                         }
                     });
             });
+            var key = Encoding.ASCII.GetBytes(Settings.ChaveSecreta);
 
+            services.AddAuthentication(opcoes =>
+            {
+                opcoes.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opcoes.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(opcoes =>
+                {
+                    opcoes.RequireHttpsMetadata = false;
+                    opcoes.SaveToken = true;
+                    opcoes.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
+
+            services.AddControllers()
+                .AddJsonOptions(opcoes =>
+                {
+                    opcoes.JsonSerializerOptions.IgnoreNullValues = true;
+                })
+                .AddNewtonsoftJson(opcoes =>
+                {
+                    opcoes.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -97,6 +137,14 @@ namespace BSPolyClinic.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(opcoes => opcoes.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseAuthentication();
+
+            app.UseStaticFiles();
+
+            //app.UseSpaStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

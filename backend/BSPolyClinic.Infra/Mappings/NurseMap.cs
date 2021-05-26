@@ -19,7 +19,7 @@ namespace BSPolyClinic.Infra.Mappings
 
             builder.Property(n => n.Code);
 
-            builder.HasOne(u => u.User).WithOne(n => n.Nurse).HasForeignKey<Nurse>(n => n.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(u => u.User).WithOne(n => n.Nurse).HasForeignKey<Nurse>(n => n.UserId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.HealthCenter).WithOne(u => u.Nurse).OnDelete(DeleteBehavior.NoAction);
 

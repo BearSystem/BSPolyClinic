@@ -2,6 +2,7 @@
 using BSPolyClinic.Domain.Entities.Users;
 using BSPolyClinic.Domain.Entities.ViewModel;
 using BSPolyClinic.Domain.Enums;
+using BSPolyClinic.Domain.ValueObjects;
 using BSPolyClinic.Infra.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace BSPolyClinic.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UpdateUserViewModel>> GetUser(Guid id)
+        public async Task<ActionResult<UpdateUserViewModel>> findUserById(Guid id)
         {
             var User = await userRepository.findById(id);
 
@@ -43,8 +44,8 @@ namespace BSPolyClinic.Api.Controllers
             return model;
         }
 
-        [HttpPost("SalvarFoto")]
-        public async Task<ActionResult> SalvarFoto()
+        [HttpPost("SaveFoto")]
+        public async Task<ActionResult> SaveFoto()
         {
             var foto = Request.Form.Files[0];
             byte[] b;
@@ -64,8 +65,8 @@ namespace BSPolyClinic.Api.Controllers
             });
         }
 
-        [HttpPost("RegistrarUser")]
-        public async Task<ActionResult> RegistrarUser(SignUpViewModel model, EUserType type)
+        [HttpPost("SignUp")]
+        public async Task<ActionResult> RegisterUser([FromBody]SignUpViewModel singUpUser)
         {
             if (ModelState.IsValid)
             {
@@ -73,18 +74,16 @@ namespace BSPolyClinic.Api.Controllers
                 string userRole = "";
 
 
-
-
                 if (await userRepository.GetQuantityRegisteredUresrs() == 0)
                 {
-                    userRole = "Administrador";
+                    userRole = "Administrator";
                 }
                 else
                 {
-                    switch (type)
+                    switch (singUpUser.TypeUser)
                     {
                         case EUserType.Administrator:
-                            userRole = "Administrador";
+                            userRole = "Administrator";
                             break;
                         case EUserType.Manager:
                             userRole = "Manager";
@@ -105,34 +104,46 @@ namespace BSPolyClinic.Api.Controllers
                     }
                 }
 
-                newUser = await userRepository.CreateUser(model.User, model.Password);
+                var nameUser = new Name(singUpUser.FirstName, singUpUser.LastName);
+                var documentUser = new Document(singUpUser.Cpf);
+                var emailUser = new Email(singUpUser.Email);
+
+                var createUser = new User(nameUser, documentUser, emailUser, singUpUser.TypeUser);
+
+                createUser.UserName = singUpUser.Email;
+                createUser.Email = singUpUser.Email;
+                createUser.PasswordHash = singUpUser.Password;
+                createUser.Foto = singUpUser.Foto;
+
+
+                newUser = await userRepository.CreateUser(createUser, singUpUser.Password);
 
                 if (newUser.Succeeded)
                 {
-                    await userRepository.IncludeUserInRole(model.User, userRole);
-                    var token = TokenService.GerarToken(model.User, userRole);
-                    await userRepository.SignIn(model.User, false);
+                    await userRepository.IncludeUserInRole(createUser, userRole);
+                    var token = TokenService.GerarToken(createUser, userRole);
+                    await userRepository.SignIn(createUser, false);
 
                     return Ok(new
                     {
-                        emailUserLogado = model.User.Email,
-                        UserId = model.User.Id,
+                        emailUserLogado = createUser.Email,
+                        UserId = createUser.Id,
                         tokenUserLogado = token
                     });
                 }
 
                 else
                 {
-                    return BadRequest(model);
+                    return BadRequest(createUser);
                 }
             }
 
-            return BadRequest(model);
+            return BadRequest(singUpUser);
 
         }
 
-        [HttpPost("LogarUser")]
-        public async Task<ActionResult> LogarUser(SignInViewModel model)
+        [HttpPost("SignIn")]
+        public async Task<ActionResult> LoginUser(SignInViewModel model)
         {
             if (model == null)
                 return NotFound("Usuário e / ou senhas inválidos");
@@ -162,16 +173,16 @@ namespace BSPolyClinic.Api.Controllers
             return NotFound("Usuário e / ou senha inválidos");
         }
 
-        [HttpGet("RetornarFotoUser/{UserId}")]
-        public async Task<dynamic> RetornarFotoUser(string UserId)
+        [HttpGet("ReturnPhotoUser/{UserId}")]
+        public async Task<dynamic> ReturnPhotoUser(string UserId)
         {
             User User = await userRepository.findUserById(UserId);
 
             return new { imagem = User.Foto };
         }
 
-        [HttpPut("AtualizarUser")]
-        public async Task<ActionResult> AtualizarUser(UpdateUserViewModel model)
+        [HttpPut("UpdateUser")]
+        public async Task<ActionResult> UpdateUser(UpdateUserViewModel model)
         {
             if (ModelState.IsValid)
             {

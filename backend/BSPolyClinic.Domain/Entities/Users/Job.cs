@@ -8,13 +8,6 @@ namespace BSPolyClinic.Domain.Entities.Users
 {
     public class Job : IdentityRole<string>
     {
-        public Job(string descricao, EUserType type)
-        {
-            Descricao = descricao;
-            Type = type;
-        }
-
-        public string Descricao { get; private set; }
-        public EUserType Type { get; private set; }
+        public string Description { get; set; }
     }
 }
