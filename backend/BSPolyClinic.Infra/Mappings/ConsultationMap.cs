@@ -20,9 +20,21 @@ namespace BSPolyClinic.Infra.Mappings
             builder.Property(c => c.Description);
             builder.Property(c => c.Observation);
 
-            builder.HasOne(a => a.Doctor).WithOne(b => b.Consultation).HasForeignKey<Consultation>(b => b.DoctorId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(a => a.Speciality).WithOne(b => b.Consultation).HasForeignKey<Consultation>(b => b.SpecialityId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(a => a.HealthCenter).WithOne(b => b.Consultation).HasForeignKey<Consultation>(b => b.HealthCenterId).OnDelete(DeleteBehavior.NoAction);
+            builder
+              .HasOne(bc => bc.Doctor)
+              .WithMany(c => c.Consultation)
+              .HasForeignKey(bc => bc.DoctorId);
+
+
+            builder
+              .HasOne(bc => bc.HealthCenter)
+              .WithMany(c => c.Consultation)
+              .HasForeignKey(bc => bc.HealthCenterId);
+
+
+            builder.HasMany(u => u.Speciality).WithOne(u => u.Consultation).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(u => u.ConsultationDate).WithOne(u => u.Consultation).OnDelete(DeleteBehavior.NoAction);
+
 
             builder.Property(c => c.Active);
 

@@ -17,7 +17,7 @@ namespace BSPolyClinic.Tests.Entities
         public ConsultationDateTests()
         {
             _consultation = new Consultation(Guid.NewGuid(), Guid.NewGuid(), true);
-            _consultationDate = new ConsultationDate(_consultation.Id, _consultation.HealthCenterId, DateTime.Now.AddDays(5), "10:30");
+            _consultationDate = new ConsultationDate(DateTime.Now.AddDays(5), "10:30");
         }
 
         [TestMethod]

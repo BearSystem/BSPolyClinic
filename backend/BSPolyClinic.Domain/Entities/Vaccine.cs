@@ -29,8 +29,7 @@ namespace BSPolyClinic.Domain.Entities
         public DateTime InitialDate { get; private set; }
         public DateTime FinalDate { get; private set; }
 
-        public Guid VaccineDateId { get; private set; }
-        public IEnumerable<VaccineDate> VaccineDate { get; set; }
+        public IList<VaccineDate> VaccineDate { get; set; }
 
         public Guid HealthCenterId { get; private set; }
         public HealthCenter HealthCenter { get; private set; }

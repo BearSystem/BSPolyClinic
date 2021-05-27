@@ -8,44 +8,40 @@ namespace BSPolyClinic.Domain.Entities
 {
     public class ConsultationDate : Entity
     {
-        public ConsultationDate(Guid consultationId, Guid healthCenterId, DateTime consultationDay, string hour)
+        public ConsultationDate(DateTime consultationDay, string hour)
         {
-            ConsultationId = consultationId;
             ConsultationDay = consultationDay;
-            HealthCenterId = healthCenterId;
             Hour = hour;
             Checked = false;
         }
 
-        public Guid ConsultationId { get; private set; }
-        public Consultation Consultation { get; private set; }
-
-        public Guid HealthCenterId { get; private set; }
-        public HealthCenter HealthCenter { get; private set; }
-
-        public string PatientId { get; private set; }
-        public Patient Patient { get; private set; }
 
         public DateTime ConsultationDay { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }
         public string Hour { get; private set; }
         public bool Checked { get; private set; }
-       
 
-        public void MakingAnAppointment(User patient)
+
+
+        public Guid ConsultationId { get; private set; }
+        public Consultation Consultation { get; private set; }
+        public Guid PatientId { get; private set; }
+        public Patient Patient { get; private set; }
+
+
+
+        public void MakingAnAppointment(Patient patient)
         {
-            PatientId = patient.Id;
+            Patient = patient;
             Checked = true;
         }
 
         public void ClearConsultation()
         {
-
             if(ConsultationDay >= DateTime.Now)
-                PatientId = "";
+                Patient = new Patient();
                 Checked = false;
-
         }
     }
 }

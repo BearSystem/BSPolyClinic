@@ -22,8 +22,7 @@ namespace BSPolyClinic.Domain.Entities.Users
         public string UserId { get; private set; }
         public User User { get; private set; }
 
-        public Guid ConsultationId { get; private set; }
-        public Consultation Consultation { get; private set; }
+        public IList<Consultation> Consultation { get; set; }
 
 
         public string Code { get; private set; }

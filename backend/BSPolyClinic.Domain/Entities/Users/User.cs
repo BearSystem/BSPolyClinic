@@ -34,19 +34,22 @@ namespace BSPolyClinic.Domain.Entities.Users
         public EUserType UserType { get; private set; }
         public byte[] Foto { get; set; }
 
-        public Administrator Administrator { get; private set; }
-        public Attendant Attendant { get; private set; }
-        public Manager Manager { get; private set; }
-
-        public Patient Patient { get; set; }
-
-        public Doctor Doctor { get; private set; }
-
-        public Nurse Nurse { get; private set; }
 
 
         public IReadOnlyCollection<Phone> Phones => _phones.ToArray();
         public IReadOnlyCollection<Address> Addresses => _addresses.ToArray();
+
+
+
+        public IEnumerable<Administrator> Administrator { get; set; }
+        public IEnumerable<Attendant> Attendant { get; set; }
+        public IEnumerable<Manager> Manager { get; set; }
+        public IEnumerable<Patient> Patient { get; set; }
+        public IEnumerable<Doctor> Doctor { get; set; }
+        public IEnumerable<Nurse> Nurse { get; set; }
+
+
+
 
         public void AlterDocument(Document document)
         {

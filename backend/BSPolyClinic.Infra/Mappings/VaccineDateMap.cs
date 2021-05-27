@@ -22,9 +22,16 @@ namespace BSPolyClinic.Infra.Mappings
             builder.Property(v => v.Hour);
             builder.Property(v => v.Checked);
 
-            builder.HasOne(x => x.Vaccine).WithMany(x => x.VaccineDate).IsRequired().OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.HealthCenter).WithMany(x => x.VaccineDate).IsRequired().OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Patient).WithMany(x => x.VaccineDate).IsRequired().OnDelete(DeleteBehavior.NoAction);
+
+            builder
+              .HasOne(bc => bc.Vaccine)
+              .WithMany(c => c.VaccineDate)
+              .HasForeignKey(bc => bc.VaccinesId);
+
+            builder
+              .HasOne(bc => bc.Patient)
+              .WithMany(c => c.VaccineDate)
+              .HasForeignKey(bc => bc.PatientId);
 
 
         }

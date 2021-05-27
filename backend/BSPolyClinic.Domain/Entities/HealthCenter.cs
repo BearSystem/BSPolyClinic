@@ -27,8 +27,7 @@ namespace BSPolyClinic.Domain.Entities
         public Address Address { get; private set; }
 
 
-        public Guid ConsultationId { get; private set; }
-        public Consultation Consultation { get; private set; }
+        public IList<Consultation> Consultation { get; set; }
 
         public Guid DoctorId { get; private set; }
         public Doctor Doctor { get; private set; }
@@ -45,14 +44,9 @@ namespace BSPolyClinic.Domain.Entities
         public Guid ManagerId { get; private set; }
         public Manager Manager { get; private set; }
 
-        public Guid ConsultationDateId { get; private set; }
-        public IEnumerable<ConsultationDate> ConsultationDate { get; set; }
-
         public Guid VaccineId { get; private set; }
         public IEnumerable<Vaccine> Vaccine { get; set; }
 
-        public Guid VaccineDateId { get; private set; }
-        public IEnumerable<VaccineDate> VaccineDate { get; set; }
 
         public void IncludeDescription(string description)
         {

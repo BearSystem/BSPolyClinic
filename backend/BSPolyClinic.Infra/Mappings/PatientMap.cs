@@ -20,9 +20,13 @@ namespace BSPolyClinic.Infra.Mappings
             builder.Property(n => n.Code);
 
 
-            builder.HasOne(a => a.User).WithOne(b => b.Patient).HasForeignKey<Patient>(b => b.UserId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasMany(u => u.HealthCenter).WithOne(u => u.Patient).OnDelete(DeleteBehavior.NoAction);
+            builder
+              .HasOne(bc => bc.User)
+              .WithMany(c => c.Patient)
+              .HasForeignKey(bc => bc.UserId);
+
+
 
             builder.Property(n => n.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(n => n.UpdatedAt).HasColumnType("datetime");

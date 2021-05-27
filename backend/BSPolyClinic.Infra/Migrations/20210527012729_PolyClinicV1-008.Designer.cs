@@ -4,14 +4,16 @@ using BSPolyClinic.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BSPolyClinic.Infra.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210527012729_PolyClinicV1-008")]
+    partial class PolyClinicV1008
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,6 +158,9 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("HealthCenterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Hour")
                         .HasColumnType("nvarchar(max)");
 
@@ -172,6 +177,8 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasIndex("ConsultationId");
 
+                    b.HasIndex("HealthCenterId");
+
                     b.HasIndex("PatientId");
 
                     b.ToTable("ConsultationDate");
@@ -187,6 +194,9 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AttendantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConsultationDateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -220,6 +230,9 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime");
+
+                    b.Property<Guid>("VaccineDateId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("VaccineId")
                         .HasColumnType("uniqueidentifier");
@@ -650,6 +663,9 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("HealthCenterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Hour")
                         .HasColumnType("nvarchar(max)");
 
@@ -669,6 +685,8 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HealthCenterId");
 
                     b.HasIndex("PatientId");
 
@@ -838,6 +856,10 @@ namespace BSPolyClinic.Infra.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", null)
+                        .WithMany("ConsultationDate")
+                        .HasForeignKey("HealthCenterId");
+
                     b.HasOne("BSPolyClinic.Domain.Entities.Users.Patient", "Patient")
                         .WithMany("ConsultationDate")
                         .HasForeignKey("PatientId")
@@ -866,7 +888,7 @@ namespace BSPolyClinic.Infra.Migrations
                     b.HasOne("BSPolyClinic.Domain.Entities.Users.Doctor", "Doctor")
                         .WithMany("HealthCenter")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BSPolyClinic.Domain.Entities.Users.Manager", "Manager")
@@ -919,7 +941,7 @@ namespace BSPolyClinic.Infra.Migrations
                     b.HasOne("BSPolyClinic.Domain.Entities.Users.Doctor", "Doctor")
                         .WithMany("Speciality")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
@@ -1074,6 +1096,10 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.VaccineDate", b =>
                 {
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", null)
+                        .WithMany("VaccineDate")
+                        .HasForeignKey("HealthCenterId");
+
                     b.HasOne("BSPolyClinic.Domain.Entities.Users.Patient", "Patient")
                         .WithMany("VaccineDate")
                         .HasForeignKey("PatientId")
@@ -1173,7 +1199,11 @@ namespace BSPolyClinic.Infra.Migrations
                 {
                     b.Navigation("Consultation");
 
+                    b.Navigation("ConsultationDate");
+
                     b.Navigation("Vaccine");
+
+                    b.Navigation("VaccineDate");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>

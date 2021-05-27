@@ -7,7 +7,7 @@ using FluentValidator.Validation;
 
 namespace BSPolyClinic.Domain.ValueObjects
 {
-    public class Document : Notifiable
+    public class Document : BaseVO
     {
         public Document()
         {
@@ -23,9 +23,9 @@ namespace BSPolyClinic.Domain.ValueObjects
             RG = rg;
             NumberSUS = numberSUS;
 
-            AddNotifications(new ValidationContract()
-                .IsTrue(Validate(CPF), "Document", "CPF inválido")
-            );
+            //AddNotifications(new ValidationContract()
+            //    .IsTrue(Validate(CPF), "Document", "CPF inválido")
+            //);
         }
         
 

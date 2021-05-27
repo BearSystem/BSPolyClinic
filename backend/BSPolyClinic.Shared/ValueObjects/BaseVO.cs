@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BSPolyClinic.Shared.ValueObjects
 {
-    public abstract class BaseVO : Notifiable
+    public abstract class BaseVO 
     {
     }
 }

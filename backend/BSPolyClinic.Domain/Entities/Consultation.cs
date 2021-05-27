@@ -16,24 +16,20 @@ namespace BSPolyClinic.Domain.Entities
             Active = active;
         }
 
-        public Guid DoctorId { get; private set; }
-        public Doctor Doctor { get; private set; }
-
-        public Guid SpecialityId { get; private set; }
-        public MedicalSpeciality Speciality { get; private set; }
-
-        public Guid HealthCenterId { get; private set; }
-        public HealthCenter HealthCenter { get; private set; }
-
-        public Guid ConsultationDateId { get; private set; }
-        public IEnumerable<ConsultationDate> ConsultationDate { get; set; }
-
-
+        public Guid DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
 
 
         public string Description { get; private set; }
         public string Observation { get; private set; }
         public bool Active { get; private set; }
+        public Guid HealthCenterId { get; private set; }
+        public HealthCenter HealthCenter { get; private set; }
+
+
+        public virtual ICollection<MedicalSpeciality> Speciality { get; set; }
+        public virtual ICollection<ConsultationDate> ConsultationDate { get; set; }
+
 
         public void ActivateConultation()
         {
