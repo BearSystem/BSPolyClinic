@@ -1,5 +1,6 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
 using BSPolyClinic.Domain.Enums;
+using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,42 +34,42 @@ namespace BSPolyClinic.Infra.Repositories
                 switch (user.UserType)
                 {
                     case EUserType.Administrator:
-                        var administrator = new Administrator(user.Id);
+                        var administrator = new Administrator();
                         administrator.AddCreatedDate();
                         administrator.AddUpdatedDate();
 
                         context.Administrators.Add(administrator);
                         break;
                     case EUserType.Manager:
-                        var manager = new Manager(user.Id);
+                        var manager = new Manager();
                         manager.AddCreatedDate();
                         manager.AddUpdatedDate();
 
                         context.Managers.Add(manager);
                         break;
                     case EUserType.Doctor:
-                        var doctor = new Doctor(user.Id);
+                        var doctor = new Doctor();
                         doctor.AddCreatedDate();
                         doctor.AddUpdatedDate();
 
                         context.Doctors.Add(doctor);
                         break;
                     case EUserType.Nurse:
-                        var nurse = new Nurse(user.Id);
+                        var nurse = new Nurse();
                         nurse.AddCreatedDate();
                         nurse.AddUpdatedDate();
 
                         context.Nurses.Add(nurse);
                         break;
                     case EUserType.Attendant:
-                        var attendant = new Attendant(user.Id);
+                        var attendant = new Attendant();
                         attendant.AddCreatedDate();
                         attendant.AddUpdatedDate();
 
                         context.Attendants.Add(attendant);
                         break;
                     default:
-                        var patient = new Patient(user.Id);
+                        var patient = new Patient();
                         patient.AddCreatedDate();
                         patient.AddUpdatedDate();
 
@@ -85,7 +86,7 @@ namespace BSPolyClinic.Infra.Repositories
             }
         }
 
-        public async Task<User> findUserById(string id)
+        public async Task<User> FindUserById(string id)
         {
             try
             {

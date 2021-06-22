@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj": {}
+    "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj": {
+    "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj",
+        "projectUniqueName": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj",
         "projectName": "BSPolyClinic.Api",
-        "projectPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj",
+        "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Api\\BSPolyClinic.Api.csproj",
         "packagesPath": "C:\\Users\\kagic\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Api\\obj\\",
+        "outputPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -34,8 +34,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj"
+              "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj"
+              },
+              "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\BSPolyClinic.Infra.csproj": {
+                "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\BSPolyClinic.Infra.csproj"
               }
             }
           }
@@ -50,6 +53,50 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.AspNetCore.SpaServices.Extensions": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.7.1, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
@@ -73,18 +120,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj": {
+    "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj",
+        "projectUniqueName": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj",
         "projectName": "BSPolyClinic.Domain",
-        "projectPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj",
+        "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj",
         "packagesPath": "C:\\Users\\kagic\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\obj\\",
+        "outputPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -97,18 +144,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj": {
-                "projectPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj"
+              "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj": {
+                "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj"
               }
             }
           }
@@ -120,8 +167,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "FluentValidator": {
               "target": "Package",
@@ -134,6 +181,10 @@
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[5.0.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -151,18 +202,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj": {
+    "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\BSPolyClinic.Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
-        "projectName": "BSPolyClinic.Shared",
-        "projectPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
+        "projectUniqueName": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\BSPolyClinic.Infra.csproj",
+        "projectName": "BSPolyClinic.Infra",
+        "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\BSPolyClinic.Infra.csproj",
         "packagesPath": "C:\\Users\\kagic\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\obj\\",
+        "outputPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Infra\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -175,15 +226,103 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Domain\\BSPolyClinic.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
+        "projectName": "BSPolyClinic.Shared",
+        "projectPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
+        "packagesPath": "C:\\Users\\kagic\\.nuget\\packages\\",
+        "outputPath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kagic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -194,8 +333,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "FluentValidator": {
               "target": "Package",
@@ -217,7 +356,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

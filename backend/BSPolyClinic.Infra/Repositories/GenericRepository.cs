@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Infra.Interfaces;
+﻿using BSPolyClinic.Infra;
+using BSPolyClinic.Infra.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,11 @@ namespace BSPolyClinic.Infra.Repositories
             _context = context;
         }
 
-        public async Task Excluir(Guid id)
+        public async Task DeleteById(Guid id)
         {
             try
             {
-                var entity = await findById(id);
+                var entity = await FindById(id);
                 _context.Set<TEntity>().Remove(entity);
                 await _context.SaveChangesAsync();
             }
@@ -31,7 +32,7 @@ namespace BSPolyClinic.Infra.Repositories
             }
         }
 
-        public async Task Excluir(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             try
             {
@@ -44,7 +45,7 @@ namespace BSPolyClinic.Infra.Repositories
             }
         }
 
-        public IQueryable<TEntity> findAll()
+        public IQueryable<TEntity> FindAll()
         {
             try
             {
@@ -56,7 +57,7 @@ namespace BSPolyClinic.Infra.Repositories
             }
         }
 
-        public async Task<TEntity> findById(Guid id)
+        public async Task<TEntity> FindById(Guid id)
         {
             try
             {
@@ -82,7 +83,7 @@ namespace BSPolyClinic.Infra.Repositories
             }
         }
 
-        public async Task Insert(List<TEntity> entity)
+        public async Task InsertList(List<TEntity> entity)
         {
             try
             {
@@ -108,6 +109,5 @@ namespace BSPolyClinic.Infra.Repositories
                 throw ex;
             }
         }
-
     }
 }

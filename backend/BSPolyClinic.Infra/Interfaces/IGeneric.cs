@@ -8,16 +8,12 @@ namespace BSPolyClinic.Infra.Interfaces
 {
     public interface IGeneric<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> findAll();
-
-        Task<TEntity> findById(Guid id);
-
+        IQueryable<TEntity> FindAll();
+        Task<TEntity> FindById(Guid id);
         Task Insert(TEntity entity);
-        Task Insert(List<TEntity> entity);
-
+        Task InsertList(List<TEntity> entity);
         Task Update(TEntity entity);
-
-        Task Excluir(Guid id);
-        Task Excluir(TEntity entity);
+        Task DeleteById(Guid id);
+        Task Delete(TEntity entity);
     }
 }

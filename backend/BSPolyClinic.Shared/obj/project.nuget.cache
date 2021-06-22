@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9Y0Z2VqvMaK3JAFLtdMxZCzP/cOgyAxy6I1JQ1x84X0zYO156KRZpMp85xlGZ6HNiwTqgEC03N/024NPKLNpHA==",
+  "dgSpecHash": "kLAklBg3wW86pCc/YlapCTpK/lzC+I1EQVmCgr3kgD0BORtumd4ZkzPdnhVdpsUNxy3OUpjy+Oa+koX1ekza9Q==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\BearSystems\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
+  "projectFilePath": "C:\\Projetos\\CSharp\\BS\\BSPolyClinic\\backend\\BSPolyClinic.Shared\\BSPolyClinic.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kagic\\.nuget\\packages\\fluentvalidator\\2.0.2\\fluentvalidator.2.0.2.nupkg.sha512",
     "C:\\Users\\kagic\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

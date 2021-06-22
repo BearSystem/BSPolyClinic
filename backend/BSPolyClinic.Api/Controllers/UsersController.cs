@@ -1,5 +1,5 @@
 ﻿using BSPolyClinic.Api.Security;
-using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Domain.Entities;
 using BSPolyClinic.Domain.Entities.ViewModel;
 using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Domain.ValueObjects;
@@ -29,7 +29,7 @@ namespace BSPolyClinic.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UpdateUserViewModel>> findUserById(Guid id)
         {
-            var User = await userRepository.findById(id);
+            var User = await userRepository.FindById(id);
 
             if (User == null)
             {
@@ -177,7 +177,7 @@ namespace BSPolyClinic.Api.Controllers
         [HttpGet("ReturnPhotoUser/{UserId}")]
         public async Task<dynamic> ReturnPhotoUser(string UserId)
         {
-            User User = await userRepository.findUserById(UserId);
+            User User = await userRepository.FindUserById(UserId);
 
             return new { imagem = User.Foto };
         }
@@ -187,7 +187,7 @@ namespace BSPolyClinic.Api.Controllers
         {
             if (ModelState.IsValid)
             {
-                User User = await userRepository.findUserById(model.User.Id);
+                User User = await userRepository.FindUserById(model.User.Id);
                 
                 await userRepository.UpdateUser(User);
 

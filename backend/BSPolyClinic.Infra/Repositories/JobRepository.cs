@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
+using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,6 @@ namespace BSPolyClinic.Infra.Repositories
     {
         public JobRepository(Context context) : base(context)
         {
-        }
-
-        public IQueryable<Job> FiltrarFuncoes(string nameJob)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,21 +13,10 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Attendant> builder)
         {
-            builder.ToTable("Attendant");
-
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.Code);
+            builder.Property(a => a.Code).HasColumnType("VARCHAR(50)");
 
-
-            builder
-              .HasOne(bc => bc.User)
-              .WithMany(c => c.Attendant)
-              .HasForeignKey(bc => bc.UserId);
-
-
-            builder.Property(a => a.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
-            builder.Property(e => e.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

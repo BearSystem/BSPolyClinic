@@ -28,12 +28,7 @@ namespace BSPolyClinic.Infra.Mappings
               .HasOne(bc => bc.Consultation)
               .WithMany(c => c.ConsultationDate)
               .HasForeignKey(bc => bc.ConsultationId);
-
-
-            builder
-              .HasOne(bc => bc.Patient)
-              .WithMany(c => c.ConsultationDate)
-              .HasForeignKey(bc => bc.PatientId);
+                        
         }
     }
 }

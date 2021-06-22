@@ -1,5 +1,4 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Domain.Enums;
+﻿using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Shared.Entities;
 using System;
 using System.Collections.Generic;

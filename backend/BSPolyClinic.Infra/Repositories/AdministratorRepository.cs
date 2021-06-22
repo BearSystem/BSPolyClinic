@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
+using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,8 @@ namespace BSPolyClinic.Infra.Repositories
 {
     public class AdministratorRepository : GenericRepository<Administrator>, IAdministrator
     {
-        private readonly Context context;
         public AdministratorRepository(Context context) : base(context)
         {
-            this.context = context;
         }
     }
 }

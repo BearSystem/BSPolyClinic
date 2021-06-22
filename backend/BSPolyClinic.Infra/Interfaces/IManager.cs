@@ -1,4 +1,4 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

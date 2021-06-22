@@ -1,15 +1,17 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Domain.Enums;
-using BSPolyClinic.Shared.Entities;
+﻿using BSPolyClinic.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
+    [Table("Addresses")]
     public class Address : Entity
     {
-        public Address(string street, string number, string complement, string district, string city, string state, string country, string zipCode, EAddressType type)
+        public Address(string street, string number, string complement, string district, string city, string state, string country, string zipCode, string description, EAddressType type)
         {
             Street = street;
             Number = number;
@@ -19,6 +21,7 @@ namespace BSPolyClinic.Domain.Entities
             State = state;
             Country = country;
             ZipCode = zipCode;
+            Description = description;
             Type = type;
         }
 
@@ -32,12 +35,6 @@ namespace BSPolyClinic.Domain.Entities
         public string ZipCode { get; private set; }
         public string Description { get; private set; }
         public EAddressType Type { get; private set; }
-
-
-        public Guid HealthCenterId { get; set; }
-        public IEnumerable<HealthCenter> HealthCenter { get; set; }
-        public string UserId { get; set; }
-        public IEnumerable<User> User { get; set; }
 
 
         public void InsertDescription(string description)

@@ -1,5 +1,4 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Domain.Enums;
+﻿using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Domain.ValueObjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

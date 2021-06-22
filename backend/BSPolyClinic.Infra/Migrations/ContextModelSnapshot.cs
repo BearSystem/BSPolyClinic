@@ -19,21 +19,6 @@ namespace BSPolyClinic.Infra.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AddressUser", b =>
-                {
-                    b.Property<Guid>("AddressesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AddressesId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AddressUser");
-                });
-
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Address", b =>
                 {
                     b.Property<Guid>("Id")
@@ -41,78 +26,137 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("Complement")
-                        .HasMaxLength(350)
-                        .HasColumnType("varchar(350)");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("Country")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("District")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<Guid>("HealthCenterId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("Number")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("VARCHAR(20)");
 
                     b.Property<string>("State")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("CHAR(2)");
 
                     b.Property<string>("Street")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ZipCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Consultation", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Administrator", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<string>("Code")
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Administrators");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Attendant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Attendants");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Doctor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Crm")
+                        .HasColumnType("VARCHAR(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorHealthCenter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
@@ -120,11 +164,8 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -132,37 +173,22 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasIndex("HealthCenterId");
 
-                    b.ToTable("Consultation");
+                    b.ToTable("DoctorHealthCenter");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.ConsultationDate", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorMedicalSpeciality", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Checked")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ConsultationDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ConsultationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Hour")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PatientId")
+                    b.Property<Guid>("MedicalSpecialityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -170,11 +196,11 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConsultationId");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("MedicalSpecialityId");
 
-                    b.ToTable("ConsultationDate");
+                    b.ToTable("DoctorMedicalSpeciality");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
@@ -186,228 +212,83 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AttendantId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("DoctorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ManagerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("NurseId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PhoneId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(120)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<Guid>("VaccineId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("AttendantId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("ManagerId");
-
-                    b.HasIndex("NurseId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("PhoneId");
-
-                    b.ToTable("HealthCenter");
+                    b.ToTable("HealthCenters");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.MedicalSpeciality", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterMedicalSpeciality", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ConsultationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("DoctorId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("MedicalSpecialityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ConsultationId");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("HealthCenterId");
 
-                    b.ToTable("MedicalSpeciality");
+                    b.HasIndex("MedicalSpecialityId");
+
+                    b.ToTable("HealthCenterMedicalSpeciality");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterNurse", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telephone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Phone");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Administrator", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("NurseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Codigo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
-
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("HealthCenterId");
 
-                    b.ToTable("Administrator");
+                    b.HasIndex("NurseId");
+
+                    b.ToTable("HealthCenterNurses");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Attendant", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Attendant");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Doctor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("Crm")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Doctor");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Job", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Job", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -437,22 +318,20 @@ namespace BSPolyClinic.Infra.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Manager", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Manager", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -461,25 +340,55 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Manager");
+                    b.ToTable("Managers");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Nurse", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.MedicalSpeciality", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("BIT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalSpecialties");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Nurse", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Crm")
+                        .HasColumnType("VARCHAR(150)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -488,25 +397,23 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Nurse");
+                    b.ToTable("Nurses");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Patient", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Patient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -515,13 +422,48 @@ namespace BSPolyClinic.Infra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Patient");
+                    b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.User", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("HealthCenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("VARCHAR(100)");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("VARCHAR(300)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HealthCenterId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Phones");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -588,93 +530,6 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Vaccine", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FinalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("HealthCenterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("InitialDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MinimumAge")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HealthCenterId");
-
-                    b.ToTable("Vaccine");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.VaccineDate", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Checked")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Hour")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("VaccinationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("VaccinesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("VaccinesId");
-
-                    b.ToTable("VaccineDate");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -781,46 +636,50 @@ namespace BSPolyClinic.Infra.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PhoneUser", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Address", b =>
                 {
-                    b.Property<Guid>("PhonesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PhonesId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PhoneUser");
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("AddressUser", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Administrator", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Address", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("AddressesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Consultation", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Attendant", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Doctor", "Doctor")
-                        .WithMany("Consultation")
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Doctor", b =>
+                {
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorHealthCenter", b =>
+                {
+                    b.HasOne("BSPolyClinic.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("DoctorHealthCenters")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
-                        .WithMany("Consultation")
+                        .WithMany("DoctorHealthCenter")
                         .HasForeignKey("HealthCenterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -830,166 +689,113 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Navigation("HealthCenter");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.ConsultationDate", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorMedicalSpeciality", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Consultation", "Consultation")
-                        .WithMany("ConsultationDate")
-                        .HasForeignKey("ConsultationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Patient", "Patient")
-                        .WithMany("ConsultationDate")
-                        .HasForeignKey("PatientId")
+                    b.HasOne("BSPolyClinic.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("DoctorMedicalSpecialities")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Consultation");
+                    b.HasOne("BSPolyClinic.Domain.Entities.MedicalSpeciality", "MedicalSpeciality")
+                        .WithMany("DoctorMedicalSpecialities")
+                        .HasForeignKey("MedicalSpecialityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Doctor");
+
+                    b.Navigation("MedicalSpeciality");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Address", "Address")
-                        .WithMany("HealthCenter")
+                    b.HasOne("BSPolyClinic.Domain.Entities.Address", "Addresses")
+                        .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Attendant", "Attendant")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("AttendantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Doctor", "Doctor")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Manager", "Manager")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Nurse", "Nurse")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("NurseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Patient", "Patient")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Phone", "Phone")
-                        .WithMany("HealthCenter")
-                        .HasForeignKey("PhoneId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Attendant");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("Nurse");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Phone");
+                    b.Navigation("Addresses");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.MedicalSpeciality", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterMedicalSpeciality", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Consultation", "Consultation")
-                        .WithMany("Speciality")
-                        .HasForeignKey("ConsultationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Doctor", "Doctor")
-                        .WithMany("Speciality")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
-                        .WithMany()
+                        .WithMany("HealthCenterMedicalSpecialities")
                         .HasForeignKey("HealthCenterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Consultation");
-
-                    b.Navigation("Doctor");
+                    b.HasOne("BSPolyClinic.Domain.Entities.MedicalSpeciality", "MedicalSpeciality")
+                        .WithMany("HealthCenterMedicalSpecialities")
+                        .HasForeignKey("MedicalSpecialityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("HealthCenter");
+
+                    b.Navigation("MedicalSpeciality");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Administrator", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterNurse", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Administrator")
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
+                        .WithMany("HealthCenterNurses")
+                        .HasForeignKey("HealthCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BSPolyClinic.Domain.Entities.Nurse", "Nurse")
+                        .WithMany("HealthCenterNurses")
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HealthCenter");
+
+                    b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Manager", b =>
+                {
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Attendant", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Nurse", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Attendant")
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Doctor", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Patient", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Doctor")
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Manager", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Manager")
-                        .HasForeignKey("UserId");
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("HealthCenterId");
 
-                    b.Navigation("User");
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Nurse", b =>
-                {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Nurse")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Patient", b =>
-                {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", "User")
-                        .WithMany("Patient")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.User", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
                 {
                     b.OwnsOne("BSPolyClinic.Domain.ValueObjects.Document", "Document", b1 =>
                         {
@@ -1061,39 +867,9 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Navigation("Name");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Vaccine", b =>
-                {
-                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
-                        .WithMany("Vaccine")
-                        .HasForeignKey("HealthCenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HealthCenter");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.VaccineDate", b =>
-                {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Patient", "Patient")
-                        .WithMany("VaccineDate")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BSPolyClinic.Domain.Entities.Vaccine", "Vaccine")
-                        .WithMany("VaccineDate")
-                        .HasForeignKey("VaccinesId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Vaccine");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Job", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.Job", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1102,7 +878,7 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1111,7 +887,7 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1120,13 +896,13 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.Job", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.Job", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1135,103 +911,48 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PhoneUser", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Doctor", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Phone", null)
-                        .WithMany()
-                        .HasForeignKey("PhonesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("DoctorHealthCenters");
 
-                    b.HasOne("BSPolyClinic.Domain.Entities.Users.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Address", b =>
-                {
-                    b.Navigation("HealthCenter");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Consultation", b =>
-                {
-                    b.Navigation("ConsultationDate");
-
-                    b.Navigation("Speciality");
+                    b.Navigation("DoctorMedicalSpecialities");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
                 {
-                    b.Navigation("Consultation");
+                    b.Navigation("DoctorHealthCenter");
 
-                    b.Navigation("Vaccine");
+                    b.Navigation("HealthCenterMedicalSpecialities");
+
+                    b.Navigation("HealthCenterNurses");
+
+                    b.Navigation("Phones");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.MedicalSpeciality", b =>
                 {
-                    b.Navigation("HealthCenter");
+                    b.Navigation("DoctorMedicalSpecialities");
+
+                    b.Navigation("HealthCenterMedicalSpecialities");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Attendant", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Nurse", b =>
                 {
-                    b.Navigation("HealthCenter");
+                    b.Navigation("HealthCenterNurses");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Doctor", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Consultation");
+                    b.Navigation("Addresses");
 
-                    b.Navigation("HealthCenter");
-
-                    b.Navigation("Speciality");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Manager", b =>
-                {
-                    b.Navigation("HealthCenter");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Nurse", b =>
-                {
-                    b.Navigation("HealthCenter");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.Patient", b =>
-                {
-                    b.Navigation("ConsultationDate");
-
-                    b.Navigation("HealthCenter");
-
-                    b.Navigation("VaccineDate");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Users.User", b =>
-                {
-                    b.Navigation("Administrator");
-
-                    b.Navigation("Attendant");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("Nurse");
-
-                    b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Vaccine", b =>
-                {
-                    b.Navigation("VaccineDate");
+                    b.Navigation("Phones");
                 });
 #pragma warning restore 612, 618
         }

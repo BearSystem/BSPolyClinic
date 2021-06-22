@@ -1,54 +1,39 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Shared.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
+    [Table("HealthCenters")]
     public class HealthCenter : Entity
     {
-        public HealthCenter(string title)
+        public HealthCenter()
+        {
+
+        }
+
+        public HealthCenter(string title, string description)
         {
             Title = title;
+            Description = description;
         }
 
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }
 
+        public Guid AddressId { get; set; }
+        public Address Addresses { get; set; }
 
-        public Guid PhoneId { get; private set; }
-        public Phone Phone { get; private set; }
+        public ICollection<Phone> Phones { get; set; }
+        public ICollection<HealthCenterMedicalSpeciality> HealthCenterMedicalSpecialities { get; set; }
+        public ICollection<DoctorHealthCenter> DoctorHealthCenter { get; set; }
+        public ICollection<HealthCenterNurse> HealthCenterNurses { get; set; }
 
-
-        public Guid AddressId { get; private set; }
-        public Address Address { get; private set; }
-
-
-        public IList<Consultation> Consultation { get; set; }
-
-        public Guid DoctorId { get; private set; }
-        public Doctor Doctor { get; private set; }
-
-        public Guid AttendantId { get; private set; }
-        public Attendant Attendant { get; private set; }
-
-        public Guid PatientId { get; private set; }
-        public Patient Patient { get; private set; }
-
-        public Guid NurseId { get; private set; }
-        public Nurse Nurse { get; private set; }
-
-        public Guid ManagerId { get; private set; }
-        public Manager Manager { get; private set; }
-
-        public Guid VaccineId { get; private set; }
-        public IEnumerable<Vaccine> Vaccine { get; set; }
-
-
-        public void IncludeDescription(string description)
+        public void AlterDescription(string description)
         {
             Description = description;
         }

@@ -28,12 +28,6 @@ namespace BSPolyClinic.Infra.Mappings
               .WithMany(c => c.VaccineDate)
               .HasForeignKey(bc => bc.VaccinesId);
 
-            builder
-              .HasOne(bc => bc.Patient)
-              .WithMany(c => c.VaccineDate)
-              .HasForeignKey(bc => bc.PatientId);
-
-
         }
     }
 }

@@ -19,4 +19,9 @@
     <ProjectReference Include="..\BSPolyClinic.Domain\BSPolyClinic.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DatabaseDiagram\" />
+    <Folder Include="ScriptsSQL\" />
+  </ItemGroup>
+
 </Project>

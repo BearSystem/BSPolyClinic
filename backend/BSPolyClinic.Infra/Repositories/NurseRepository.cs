@@ -1,4 +1,5 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
+using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using System;
 using System.Collections.Generic;

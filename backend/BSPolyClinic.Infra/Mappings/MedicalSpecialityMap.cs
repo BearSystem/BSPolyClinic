@@ -13,16 +13,12 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<MedicalSpeciality> builder)
         {
-            builder.ToTable("MedicalSpeciality");
-
             builder.HasKey(m => m.Id);
 
-            builder.Property(m => m.Description);
-            builder.Property(m => m.Observation);
-            builder.Property(m => m.Active);
-
-            builder.Property(m => m.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
-            builder.Property(m => m.UpdatedAt).HasColumnType("datetime");
+            builder.Property(m => m.Title).HasColumnType("VARCHAR(512)");
+            builder.Property(m => m.Description).HasColumnType("VARCHAR(512)");
+            builder.Property(m => m.Observation).HasColumnType("VARCHAR(512)");
+            builder.Property(m => m.Active).HasColumnType("BIT");
         }
     }
 }

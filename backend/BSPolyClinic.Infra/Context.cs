@@ -1,5 +1,4 @@
 ﻿using BSPolyClinic.Domain.Entities;
-using BSPolyClinic.Domain.Entities.Users;
 using BSPolyClinic.Infra.Mappings;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,19 +15,23 @@ namespace BSPolyClinic.Infra
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Attendant> Attendants { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<DoctorHealthCenter> DoctorHealthCenter { get; set; }
+        public DbSet<DoctorMedicalSpeciality> DoctorMedicalSpeciality { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Consultation> Consultations { get; set; }
-        public DbSet<ConsultationDate> ConsultationDates { get; set; }
+        //public DbSet<Consultation> Consultations { get; set; }
+        //public DbSet<ConsultationDate> ConsultationDates { get; set; }
         public DbSet<HealthCenter> HealthCenters { get; set; }
+        public DbSet<HealthCenterMedicalSpeciality> HealthCenterMedicalSpeciality { get; set; }
+        public DbSet<HealthCenterNurse> HealthCenterNurses { get; set; }
         public DbSet<MedicalSpeciality> MedicalSpecialities { get; set; }
         public DbSet<Phone> Phones { get; set; }
-        public DbSet<Vaccine> Vaccines { get; set; }
-        public DbSet<VaccineDate> VaccineDates { get; set; }
+        //public DbSet<Vaccine> Vaccines { get; set; }
+        //public DbSet<VaccineDate> VaccineDates { get; set; }
 
 
 
@@ -41,8 +44,8 @@ namespace BSPolyClinic.Infra
             builder.ApplyConfiguration(new AddressMap());
             builder.ApplyConfiguration(new AdministratorMap());
             builder.ApplyConfiguration(new AttendantMap());
-            builder.ApplyConfiguration(new ConsultationDateMap());
-            builder.ApplyConfiguration(new ConsultationMap());
+            //builder.ApplyConfiguration(new ConsultationDateMap());
+            //builder.ApplyConfiguration(new ConsultationMap());
             builder.ApplyConfiguration(new DoctorMap());
             builder.ApplyConfiguration(new HealthCenterMap());
             builder.ApplyConfiguration(new ManagerMap());
@@ -51,8 +54,8 @@ namespace BSPolyClinic.Infra
             builder.ApplyConfiguration(new PatientMap());
             builder.ApplyConfiguration(new PhoneMap());
             builder.ApplyConfiguration(new UserMap());
-            builder.ApplyConfiguration(new VaccineDateMap());
-            builder.ApplyConfiguration(new VaccineMap());
+            //builder.ApplyConfiguration(new VaccineDateMap());
+            //builder.ApplyConfiguration(new VaccineMap());
         }
     }
 }

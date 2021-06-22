@@ -1,5 +1,5 @@
 using BSPolyClinic.Api.Security;
-using BSPolyClinic.Domain.Entities.Users;
+using BSPolyClinic.Domain.Entities;
 using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using BSPolyClinic.Infra.Repositories;

@@ -1,40 +1,40 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Domain.Enums;
-using BSPolyClinic.Shared.Entities;
+﻿using BSPolyClinic.Domain.Enums;
+using BSPolyClinic.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
+    [Table("Phones")]
     public class Phone : Entity
     {
-        public Phone(string telephone, EPhoneType type)
+        public Phone(string number, EPhoneType type)
         {
-            Telephone = telephone;
+            Number = number;
             Type = type;
         }
 
-        public string Telephone { get; private set; }
-        public string Observation { get; private set; }
+        public string Number { get; private set; }
         public EPhoneType Type { get; private set; }
+        public string Observation { get; private set; }
 
-
-        public string UserId { get; set; }
-        public IEnumerable<User> User { get; set; }
-
-
-        public Guid HealthCenterId { get; set; }
-        public IEnumerable<HealthCenter> HealthCenter { get; set; }
-
-        public void IncludeNote(string observation)
+        public void AlterPhone(string telephone)
         {
-            Observation = observation;
+            Number = telephone;
         }
 
         public void AlterTypePhone(EPhoneType type)
         {
             Type = type;
         }
+        public void IncludeNote(string observation)
+        {
+            Observation = observation;
+        }
+
     }
 }

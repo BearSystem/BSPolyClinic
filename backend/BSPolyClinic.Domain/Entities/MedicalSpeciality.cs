@@ -1,35 +1,29 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
-using BSPolyClinic.Shared.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
+    [Table("MedicalSpecialties")]
     public class MedicalSpeciality : Entity
     {
-        public MedicalSpeciality(string title)
+        public MedicalSpeciality(string title, string description, bool active)
         {
             Title = title;
-            Active = true;
+            Description = description;
+            Active = active;
         }
 
         public string Title { get; private set; }
+        public bool Active { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }
-        public bool Active { get; private set; }
 
-        public Guid DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
-
-        public Guid HealthCenterId { get; set; }
-        public HealthCenter HealthCenter { get; set; }
-
-        public Guid ConsultationId { get; set; }
-        public Consultation Consultation { get; set; }
-
+        public ICollection<HealthCenterMedicalSpeciality> HealthCenterMedicalSpecialities { get; set; }
+        public ICollection<DoctorMedicalSpeciality> DoctorMedicalSpecialities { get; set; }
 
         public void ActivateConultation()
         {
@@ -43,7 +37,7 @@ namespace BSPolyClinic.Domain.Entities
             }
         }
 
-        public void IncludeDescription(string description)
+        public void AlterDescription(string description)
         {
             Description = description;
         }

@@ -26,12 +26,6 @@ namespace BSPolyClinic.Infra.Mappings
             builder.Property(v => v.InitialDate);
             builder.Property(v => v.FinalDate);
 
-
-            builder
-              .HasOne(bc => bc.HealthCenter)
-              .WithMany(c => c.Vaccine)
-              .HasForeignKey(bc => bc.HealthCenterId);
-
             builder.HasMany(u => u.VaccineDate).WithOne(u => u.Vaccine).OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(a => a.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();

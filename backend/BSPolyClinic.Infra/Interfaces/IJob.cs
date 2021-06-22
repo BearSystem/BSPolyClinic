@@ -1,4 +1,4 @@
-﻿using BSPolyClinic.Domain.Entities.Users;
+﻿using BSPolyClinic.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,5 @@ namespace BSPolyClinic.Infra.Interfaces
 {
     public interface IJob : IGeneric<Job>
     {
-        IQueryable<Job> FiltrarFuncoes(string nameJob);
     }
 }
