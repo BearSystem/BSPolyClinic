@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BSPolyClinic.Domain.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EAddressType
     {
-        Residential = 1,
-        Friends = 2,
-        Family = 3,
-        Work = 4,
+        Residential = 0,
+        Friends = 1,
+        Family = 2,
+        Work = 3,
     }
 }

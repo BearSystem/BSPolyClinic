@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Infra.Interfaces
 {
-    public interface IPhone : IGeneric<Phone>
+    public interface IPhoneUser : IGeneric<PhoneUser>
     {
     }
 }

@@ -10,10 +10,7 @@ namespace BSPolyClinic.Domain.Entities
     [Table("HealthCenters")]
     public class HealthCenter : Entity
     {
-        public HealthCenter()
-        {
-
-        }
+        public HealthCenter() { }
 
         public HealthCenter(string title, string description)
         {
@@ -21,14 +18,13 @@ namespace BSPolyClinic.Domain.Entities
             Description = description;
         }
 
+        public int HealthCenterId { get; set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }
 
-        public Guid AddressId { get; set; }
-        public Address Addresses { get; set; }
-
-        public ICollection<Phone> Phones { get; set; }
+        public ICollection<PhoneHealthCenter> Phones { get; set; }
+        public ICollection<AddressHealthCenter> AddressHealthCenters { get; set; }
         public ICollection<HealthCenterMedicalSpeciality> HealthCenterMedicalSpecialities { get; set; }
         public ICollection<DoctorHealthCenter> DoctorHealthCenter { get; set; }
         public ICollection<HealthCenterNurse> HealthCenterNurses { get; set; }

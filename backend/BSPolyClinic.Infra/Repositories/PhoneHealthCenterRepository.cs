@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Infra.Repositories
 {
-    public class PhoneRepository : GenericRepository<Phone>, IPhone
+    public class PhoneHealthCenterRepository : GenericRepository<PhoneHealthCenter>, IPhoneHealthCenter
     {
-        public PhoneRepository(Context context) : base(context)
+        public PhoneHealthCenterRepository(Context context) : base(context)
         {
         }
     }

@@ -8,6 +8,8 @@ namespace BSPolyClinic.Domain.Entities
 {
     public class HealthCenterMedicalSpeciality : Entity
     {
+        public int HealthCenterMedicalSpecialityId { get; private set; }
+
         public Guid HealthCenterId { get; set; }
         public HealthCenter HealthCenter { get; set; }
 

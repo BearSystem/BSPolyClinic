@@ -8,18 +8,12 @@ namespace BSPolyClinic.Domain.Entities
 {
     public class Entity
     {
-        public Entity()
-        {
-            Id = Guid.NewGuid();
-        }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
-        public Guid Id { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public DateTime UpdatedAt { get; private set; }
-
-        public void AddCreatedDate()
+        public void AddCreateDate()
         {
-            CreatedAt = DateTime.Now.Date;
+           CreatedAt = DateTime.Now.Date;
         }
 
         public void AddUpdatedDate()

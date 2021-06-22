@@ -15,8 +15,6 @@ namespace BSPolyClinic.Infra.Mappings
         {
             builder.ToTable("Jobs");
 
-            builder.HasKey(f => f.Id);
-
             builder.Property(f => f.Id).ValueGeneratedOnAdd();
             builder.Property(f => f.Description).HasMaxLength(50);
 

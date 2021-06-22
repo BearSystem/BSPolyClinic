@@ -41,7 +41,8 @@ namespace BSPolyClinic.Api
             services.AddIdentity<User, Job>().AddEntityFrameworkStores<Context>();
 
 
-            services.AddScoped<IAddress, AddressRepository>();
+            services.AddScoped<IAddressUser, AddressUserRepository>();
+            services.AddScoped<IAddressHealthCenter, AddressHealthCenterRepository>();
             services.AddScoped<IAdministrator, AdministratorRepository>();
             services.AddScoped<IAttendant, AttendantRepository>();
             services.AddScoped<IConsultation, ConsultationRepository>();

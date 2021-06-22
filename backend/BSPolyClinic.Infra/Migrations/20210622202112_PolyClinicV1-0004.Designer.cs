@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BSPolyClinic.Infra.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210622132648_PolyClinicV1-0001")]
-    partial class PolyClinicV10001
+    [Migration("20210622202112_PolyClinicV1-0004")]
+    partial class PolyClinicV10004
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,11 +21,12 @@ namespace BSPolyClinic.Infra.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Address", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.AddressHealthCenter", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("AddressHealthCenterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
                         .HasColumnType("VARCHAR(512)");
@@ -37,7 +38,64 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("VARCHAR(512)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<string>("District")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<int>("HealthCenterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("VARCHAR(20)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("CHAR(2)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("VARCHAR(100)");
+
+                    b.HasKey("AddressHealthCenterId");
+
+                    b.HasIndex("HealthCenterId");
+
+                    b.ToTable("AddressHealthCenters");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.AddressUser", b =>
+                {
+                    b.Property<int>("AddressUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<string>("Complement")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("VARCHAR(512)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasColumnType("VARCHAR(512)");
@@ -58,40 +116,44 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("VARCHAR(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AddressUserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("AddressUsers");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Administrator", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("AdministratorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdministratorId");
 
                     b.HasIndex("UserId");
 
@@ -100,23 +162,26 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Attendant", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("AttendantId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AttendantId");
 
                     b.HasIndex("UserId");
 
@@ -125,26 +190,29 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Doctor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("DoctorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Crm")
                         .HasColumnType("VARCHAR(200)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DoctorId");
 
                     b.HasIndex("UserId");
 
@@ -153,9 +221,10 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorHealthCenter", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("DoctorHealthCenterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -163,26 +232,33 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("DoctorId1")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("HealthCenterId1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("DoctorHealthCenterId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorId1");
 
-                    b.HasIndex("HealthCenterId");
+                    b.HasIndex("HealthCenterId1");
 
                     b.ToTable("DoctorHealthCenter");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.DoctorMedicalSpeciality", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("DoctorMedicalSpecialityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -190,32 +266,38 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("DoctorId1")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("MedicalSpecialityId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("MedicalSpecialityId1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("DoctorMedicalSpecialityId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorId1");
 
-                    b.HasIndex("MedicalSpecialityId");
+                    b.HasIndex("MedicalSpecialityId1");
 
                     b.ToTable("DoctorMedicalSpeciality");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("HealthCenterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasColumnType("VARCHAR(512)");
@@ -227,20 +309,19 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("VARCHAR(120)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
+                    b.HasKey("HealthCenterId");
 
                     b.ToTable("HealthCenters");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterMedicalSpeciality", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("HealthCenterMedicalSpecialityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -248,26 +329,33 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("HealthCenterId1")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("MedicalSpecialityId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("MedicalSpecialityId1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("HealthCenterMedicalSpecialityId");
 
-                    b.HasIndex("HealthCenterId");
+                    b.HasIndex("HealthCenterId1");
 
-                    b.HasIndex("MedicalSpecialityId");
+                    b.HasIndex("MedicalSpecialityId1");
 
                     b.ToTable("HealthCenterMedicalSpeciality");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterNurse", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("HealthCenterNurseId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -275,17 +363,23 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Property<Guid>("HealthCenterId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("HealthCenterId1")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("NurseId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("NurseId1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("HealthCenterNurseId");
 
-                    b.HasIndex("HealthCenterId");
+                    b.HasIndex("HealthCenterId1");
 
-                    b.HasIndex("NurseId");
+                    b.HasIndex("NurseId1");
 
                     b.ToTable("HealthCenterNurses");
                 });
@@ -293,6 +387,7 @@ namespace BSPolyClinic.Infra.Migrations
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Job", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -300,7 +395,8 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -317,28 +413,81 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("Jobs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1d4f0035-8448-4018-9a30-4d7b1b7b7aa9",
+                            ConcurrencyStamp = "4eeafa8a-b946-4660-ac0d-ddfc9a4e8a12",
+                            Description = "Administrador do sistema",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "68377797-8fa8-49d9-a824-29441db5de3d",
+                            ConcurrencyStamp = "36a68435-442e-4c66-bedc-f1f78d52725f",
+                            Description = "Gestor(a)",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "6b2ee624-e125-4ab8-b866-a51d98aa40c3",
+                            ConcurrencyStamp = "70daacf2-2c5e-4806-bdeb-7270b7e82ca8",
+                            Description = "Médico(a)",
+                            Name = "Doctor",
+                            NormalizedName = "DOCTOR"
+                        },
+                        new
+                        {
+                            Id = "a7eb93ff-d311-4359-b73e-1924de699865",
+                            ConcurrencyStamp = "ca7d4c52-61fa-4ac1-9500-0dedf505dc26",
+                            Description = "Enfermeiro(a)",
+                            Name = "Nurse",
+                            NormalizedName = "NURSE"
+                        },
+                        new
+                        {
+                            Id = "b90efb92-b9a4-4c47-a6cf-e72fa01a0784",
+                            ConcurrencyStamp = "d6f630ba-d2a3-479d-a343-aac9d15f1fc6",
+                            Description = "Atendente",
+                            Name = "Attendant",
+                            NormalizedName = "ATTENDANT"
+                        },
+                        new
+                        {
+                            Id = "3ffe6a94-bda3-4821-aeed-60ddaa2962e7",
+                            ConcurrencyStamp = "c32ac403-7b06-446e-9919-34e77d8c20a3",
+                            Description = "Paciente",
+                            Name = "Patient",
+                            NormalizedName = "PATIENT"
+                        });
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Manager", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("ManagerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ManagerId");
 
                     b.HasIndex("UserId");
 
@@ -347,15 +496,18 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.MedicalSpeciality", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("MedicalSpecialityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active")
                         .HasColumnType("BIT");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasColumnType("VARCHAR(512)");
@@ -367,35 +519,38 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("VARCHAR(512)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                    b.HasKey("MedicalSpecialityId");
 
                     b.ToTable("MedicalSpecialties");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Nurse", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("NurseId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Crm")
                         .HasColumnType("VARCHAR(150)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("NurseId");
 
                     b.HasIndex("UserId");
 
@@ -404,40 +559,46 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Patient", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PatientId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.PhoneHealthCenter", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("PhoneHealthCenterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<Guid?>("HealthCenterId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("HealthCenterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Number")
                         .HasColumnType("VARCHAR(100)");
@@ -449,23 +610,54 @@ namespace BSPolyClinic.Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
+                    b.HasKey("PhoneHealthCenterId");
 
                     b.HasIndex("HealthCenterId");
 
+                    b.ToTable("PhoneHealthCenter");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.PhoneUser", b =>
+                {
+                    b.Property<int>("PhoneUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("VARCHAR(100)");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("VARCHAR(300)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PhoneUserId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Phones");
+                    b.ToTable("PhoneUser");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -638,11 +830,26 @@ namespace BSPolyClinic.Infra.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Address", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.AddressHealthCenter", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("UserId");
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
+                        .WithMany("AddressHealthCenters")
+                        .HasForeignKey("HealthCenterId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("HealthCenter");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.AddressUser", b =>
+                {
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany("AddressesUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.Administrator", b =>
@@ -676,15 +883,11 @@ namespace BSPolyClinic.Infra.Migrations
                 {
                     b.HasOne("BSPolyClinic.Domain.Entities.Doctor", "Doctor")
                         .WithMany("DoctorHealthCenters")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId1");
 
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
                         .WithMany("DoctorHealthCenter")
-                        .HasForeignKey("HealthCenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HealthCenterId1");
 
                     b.Navigation("Doctor");
 
@@ -695,45 +898,26 @@ namespace BSPolyClinic.Infra.Migrations
                 {
                     b.HasOne("BSPolyClinic.Domain.Entities.Doctor", "Doctor")
                         .WithMany("DoctorMedicalSpecialities")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId1");
 
                     b.HasOne("BSPolyClinic.Domain.Entities.MedicalSpeciality", "MedicalSpeciality")
                         .WithMany("DoctorMedicalSpecialities")
-                        .HasForeignKey("MedicalSpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MedicalSpecialityId1");
 
                     b.Navigation("Doctor");
 
                     b.Navigation("MedicalSpeciality");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
-                {
-                    b.HasOne("BSPolyClinic.Domain.Entities.Address", "Addresses")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Addresses");
-                });
-
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenterMedicalSpeciality", b =>
                 {
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
                         .WithMany("HealthCenterMedicalSpecialities")
-                        .HasForeignKey("HealthCenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HealthCenterId1");
 
                     b.HasOne("BSPolyClinic.Domain.Entities.MedicalSpeciality", "MedicalSpeciality")
                         .WithMany("HealthCenterMedicalSpecialities")
-                        .HasForeignKey("MedicalSpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MedicalSpecialityId1");
 
                     b.Navigation("HealthCenter");
 
@@ -744,15 +928,11 @@ namespace BSPolyClinic.Infra.Migrations
                 {
                     b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
                         .WithMany("HealthCenterNurses")
-                        .HasForeignKey("HealthCenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HealthCenterId1");
 
                     b.HasOne("BSPolyClinic.Domain.Entities.Nurse", "Nurse")
                         .WithMany("HealthCenterNurses")
-                        .HasForeignKey("NurseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NurseId1");
 
                     b.Navigation("HealthCenter");
 
@@ -786,15 +966,26 @@ namespace BSPolyClinic.Infra.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BSPolyClinic.Domain.Entities.Phone", b =>
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.PhoneHealthCenter", b =>
                 {
-                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", null)
+                    b.HasOne("BSPolyClinic.Domain.Entities.HealthCenter", "HealthCenter")
                         .WithMany("Phones")
-                        .HasForeignKey("HealthCenterId");
+                        .HasForeignKey("HealthCenterId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.HasOne("BSPolyClinic.Domain.Entities.User", null)
-                        .WithMany("Phones")
-                        .HasForeignKey("UserId");
+                    b.Navigation("HealthCenter");
+                });
+
+            modelBuilder.Entity("BSPolyClinic.Domain.Entities.PhoneUser", b =>
+                {
+                    b.HasOne("BSPolyClinic.Domain.Entities.User", "User")
+                        .WithMany("PhonesUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
@@ -805,15 +996,27 @@ namespace BSPolyClinic.Infra.Migrations
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("CPF")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("NumberSUS")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("RG")
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(450)");
 
                             b1.HasKey("UserId");
+
+                            b1.HasIndex("CPF")
+                                .IsUnique()
+                                .HasFilter("[Document_CPF] IS NOT NULL");
+
+                            b1.HasIndex("NumberSUS")
+                                .IsUnique()
+                                .HasFilter("[Document_NumberSUS] IS NOT NULL");
+
+                            b1.HasIndex("RG")
+                                .IsUnique()
+                                .HasFilter("[Document_RG] IS NOT NULL");
 
                             b1.ToTable("AspNetUsers");
 
@@ -929,6 +1132,8 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.HealthCenter", b =>
                 {
+                    b.Navigation("AddressHealthCenters");
+
                     b.Navigation("DoctorHealthCenter");
 
                     b.Navigation("HealthCenterMedicalSpecialities");
@@ -952,9 +1157,9 @@ namespace BSPolyClinic.Infra.Migrations
 
             modelBuilder.Entity("BSPolyClinic.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("AddressesUsers");
 
-                    b.Navigation("Phones");
+                    b.Navigation("PhonesUsers");
                 });
 #pragma warning restore 612, 618
         }

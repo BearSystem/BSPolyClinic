@@ -23,10 +23,11 @@ namespace BSPolyClinic.Domain.Entities
             _healthCenter = new List<HealthCenter>();
         }
 
+        public int VaccineDateId { get; set; }
         public Guid VaccinesId { get; set; }
         public Vaccine Vaccine { get; set; }
 
-        public Guid PatientId { get; private set; }
+        public int PatientId { get; private set; }
         public Patient Patient { get; private set; }
 
         public DateTime VaccinationDate { get; private set; }
@@ -37,7 +38,7 @@ namespace BSPolyClinic.Domain.Entities
 
         public void MakingAnAppointment(Patient patient)
         {
-            PatientId = patient.Id;
+            PatientId = patient.PatientId;
             Checked = true;
         }
 

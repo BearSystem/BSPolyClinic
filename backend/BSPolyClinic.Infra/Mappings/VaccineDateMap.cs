@@ -13,21 +13,18 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<VaccineDate> builder)
         {
-            builder.ToTable("VaccineDate");
-
-            builder.HasKey(v => v.Id);
+            builder.HasKey(v => v.VaccineDateId);
+            builder.Property(v => v.VaccineDateId).ValueGeneratedOnAdd();
 
             builder.Property(v => v.Description);
             builder.Property(v => v.Observation);
             builder.Property(v => v.Hour);
             builder.Property(v => v.Checked);
 
+            builder.HasOne(bc => bc.Vaccine).WithMany(c => c.VaccineDate).HasForeignKey(bc => bc.VaccinesId);
 
-            builder
-              .HasOne(bc => bc.Vaccine)
-              .WithMany(c => c.VaccineDate)
-              .HasForeignKey(bc => bc.VaccinesId);
-
+            builder.Property(a => a.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(e => e.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

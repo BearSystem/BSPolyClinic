@@ -10,16 +10,15 @@ namespace BSPolyClinic.Domain.Entities
     [Table("Patients")]
     public class Patient : Entity
     {
-        public Patient()
-        {
+        public Patient() { }
 
-        }
         public Patient(string code, User user)
         {
             Code = code;
             UserId = user.Id;
         }
 
+        public int PatientId { get; set; }
         public string Code { get; private set; }
 
         public string UserId { get; set; }

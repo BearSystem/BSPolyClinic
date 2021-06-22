@@ -17,6 +17,7 @@ namespace BSPolyClinic.Domain.Entities
             Active = active;
         }
 
+        public int MedicalSpecialityId { get; set; }
         public string Title { get; private set; }
         public bool Active { get; private set; }
         public string Description { get; private set; }

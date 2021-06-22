@@ -15,7 +15,8 @@ namespace BSPolyClinic.Infra.Mappings
         {
             builder.ToTable("Consultation");
 
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.ConsultationId);
+            builder.Property(c => c.ConsultationId).ValueGeneratedOnAdd();
 
             builder.Property(c => c.Description);
             builder.Property(c => c.Observation);

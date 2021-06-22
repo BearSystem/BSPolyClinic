@@ -21,6 +21,7 @@ namespace BSPolyClinic.Domain.Entities
             FinalDate = finalDate;
         }
 
+        public int VaccineId { get; private set; }
         public string Title { get; private set; }
         public int MinimumAge { get; private set; }
         public string Description { get; private set; }

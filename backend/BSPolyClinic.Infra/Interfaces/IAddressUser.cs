@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Infra.Interfaces
 {
-    public interface IAddress : IGeneric<Address>
+    public interface IAddressUser : IGeneric<AddressUser>
     {
     }
 }

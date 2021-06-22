@@ -14,7 +14,7 @@ namespace BSPolyClinic.Domain.Entities
             Checked = false;
         }
 
-
+        public int ConsultationDateId { get; private set; }
         public DateTime ConsultationDay { get; private set; }
         public string Description { get; private set; }
         public string Observation { get; private set; }

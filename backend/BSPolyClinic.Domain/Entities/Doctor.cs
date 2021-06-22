@@ -19,6 +19,7 @@ namespace BSPolyClinic.Domain.Entities
             UserId = user.Id;
         }
 
+        public int DoctorId { get; set; }
         public string Code { get; private set; }
         public string Crm { get; private set; }
 
@@ -27,6 +28,7 @@ namespace BSPolyClinic.Domain.Entities
 
         public ICollection<DoctorMedicalSpeciality> DoctorMedicalSpecialities { get; set; }
         public ICollection<DoctorHealthCenter> DoctorHealthCenters { get; set; }
+
 
         public void AlterCode(string code)
         {

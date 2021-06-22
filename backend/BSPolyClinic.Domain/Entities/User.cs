@@ -17,19 +17,19 @@ namespace BSPolyClinic.Domain.Entities
 
         public User(Name name, Document document, Email email, EUserType userType)
         {
-            Id = Guid.NewGuid().ToString();
             Name = name;
             Document = document;
             Emails = email;
             UserType = userType;
         }
+
         public Name Name { get; private set; }
         public Email Emails { get; private set; }
         public Document Document { get; private set; }
         public EUserType UserType { get; private set; }
         public byte[] Foto { get; set; }
-        public ICollection<Phone> Phones { get; set; }
-        public ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<PhoneUser> PhonesUsers { get; set; }
+        public virtual ICollection<AddressUser> AddressesUsers { get; set; }
 
         [NotMapped]
         public string Crm { get; set; }

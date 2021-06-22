@@ -1,5 +1,4 @@
 ﻿using BSPolyClinic.Domain.Entities;
-using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Infra.Repositories
 {
-    public class AddressUserRepository : GenericRepository<AddressUser>, IAddressUser
+    public class AddressHealthCenterRepository : GenericRepository<AddressHealthCenter>, IAddressHealthCenter
     {
-        public AddressUserRepository(Context context) : base(context)
+        public AddressHealthCenterRepository(Context context) : base(context)
         {
         }
     }

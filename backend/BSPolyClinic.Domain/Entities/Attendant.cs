@@ -21,8 +21,8 @@ namespace BSPolyClinic.Domain.Entities
             UserId = user.Id;
         }
 
-        public string Code { get; private set; }
-        
+        public int AttendantId { get; private set; }
+        public string Code { get; private set; }        
         public string UserId { get; set; }
         public User User { get; set; }
 

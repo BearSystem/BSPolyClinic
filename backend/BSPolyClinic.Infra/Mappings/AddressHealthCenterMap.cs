@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Infra.Mappings
 {
-    public class AddressMap : IEntityTypeConfiguration<Address>
+    public class AddressHealthCenterMap : IEntityTypeConfiguration<AddressHealthCenter>
     {
-        public void Configure(EntityTypeBuilder<Address> builder)
+        public void Configure(EntityTypeBuilder<AddressHealthCenter> builder)
         {
-            builder.HasKey(a => a.Id);
+            builder.HasKey(a => a.AddressHealthCenterId);
+            builder.Property(a => a.AddressHealthCenterId).ValueGeneratedOnAdd();
 
             builder.Property(a => a.Street).HasColumnType("VARCHAR(512)");
             builder.Property(a => a.Number).HasColumnType("VARCHAR(20)");
@@ -26,6 +27,10 @@ namespace BSPolyClinic.Infra.Mappings
             builder.Property(a => a.Description).HasColumnType("VARCHAR(512)");
             builder.Property(a => a.Type).HasConversion<int>();
 
+            builder.HasOne(a => a.HealthCenter).WithMany(a => a.AddressHealthCenters).HasForeignKey(a => a.HealthCenterId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(d => d.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(d => d.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

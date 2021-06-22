@@ -13,11 +13,18 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<HealthCenter> builder)
         {
-            builder.HasKey(h => h.Id);
+            builder.HasKey(h => h.HealthCenterId);
+            builder.Property(h => h.HealthCenterId).ValueGeneratedOnAdd();
 
             builder.Property(h => h.Title).HasColumnType("VARCHAR(120)");
             builder.Property(h => h.Description).HasColumnType("VARCHAR(512)");
             builder.Property(h => h.Observation).HasColumnType("VARCHAR(512)");
+
+            builder.Property(d => d.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(d => d.UpdatedAt).HasColumnType("datetime");
+
+            builder.HasMany(u => u.AddressHealthCenters).WithOne(u => u.HealthCenter).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(u => u.Phones).WithOne(u => u.HealthCenter).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

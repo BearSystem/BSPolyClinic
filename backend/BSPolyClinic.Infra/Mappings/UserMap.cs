@@ -13,6 +13,8 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(u => u.Id);
+            builder.Property(u => u.Id).ValueGeneratedOnAdd();
 
             builder.OwnsOne(u => u.Name).Property(n => n.FirstName);
             builder.OwnsOne(u => u.Name).Property(n => n.LastName);
@@ -25,8 +27,14 @@ namespace BSPolyClinic.Infra.Mappings
             builder.OwnsOne(u => u.Document).Property(d => d.RG);
             builder.OwnsOne(u => u.Document).Property(d => d.NumberSUS);
 
+            builder.OwnsOne(u => u.Document).HasIndex(d => d.CPF).IsUnique();
+            builder.OwnsOne(u => u.Document).HasIndex(d => d.RG).IsUnique();
+            builder.OwnsOne(u => u.Document).HasIndex(d => d.NumberSUS).IsUnique();
+
             builder.Property(u => u.UserType).HasConversion<int>();
 
+            builder.HasMany(u => u.AddressesUsers).WithOne(u => u.User).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(u => u.PhonesUsers).WithOne(u => u.User).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

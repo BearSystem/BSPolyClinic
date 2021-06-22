@@ -13,10 +13,13 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Administrator> builder)
         {
-            builder.HasKey(a => a.Id);
+            builder.HasKey(a => a.AdministratorId);
+            builder.Property(a => a.AdministratorId).ValueGeneratedOnAdd();
 
             builder.Property(a => a.Code).HasColumnType("VARCHAR(50)");
 
+            builder.Property(d => d.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
+            builder.Property(d => d.UpdatedAt).HasColumnType("datetime");
         }
     }
 }

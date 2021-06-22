@@ -22,14 +22,16 @@ namespace BSPolyClinic.Infra
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<AddressUser> AddressUsers { get; set; }
+        public DbSet<AddressHealthCenter> AddressHealthCenters { get; set; }
         //public DbSet<Consultation> Consultations { get; set; }
         //public DbSet<ConsultationDate> ConsultationDates { get; set; }
         public DbSet<HealthCenter> HealthCenters { get; set; }
         public DbSet<HealthCenterMedicalSpeciality> HealthCenterMedicalSpeciality { get; set; }
         public DbSet<HealthCenterNurse> HealthCenterNurses { get; set; }
         public DbSet<MedicalSpeciality> MedicalSpecialities { get; set; }
-        public DbSet<Phone> Phones { get; set; }
+        public DbSet<PhoneUser> PhoneUsers { get; set; }
+        public DbSet<PhoneHealthCenter> PhoneHealthCenters { get; set; }
         //public DbSet<Vaccine> Vaccines { get; set; }
         //public DbSet<VaccineDate> VaccineDates { get; set; }
 
@@ -41,7 +43,8 @@ namespace BSPolyClinic.Infra
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new AddressMap());
+            builder.ApplyConfiguration(new AddressUserMap());
+            builder.ApplyConfiguration(new AddressHealthCenterMap());
             builder.ApplyConfiguration(new AdministratorMap());
             builder.ApplyConfiguration(new AttendantMap());
             //builder.ApplyConfiguration(new ConsultationDateMap());
@@ -53,7 +56,8 @@ namespace BSPolyClinic.Infra
             builder.ApplyConfiguration(new MedicalSpecialityMap());
             builder.ApplyConfiguration(new NurseMap());
             builder.ApplyConfiguration(new PatientMap());
-            builder.ApplyConfiguration(new PhoneMap());
+            builder.ApplyConfiguration(new PhoneUserMap());
+            builder.ApplyConfiguration(new PhoneHealthCenterMap());
             builder.ApplyConfiguration(new UserMap());
             //builder.ApplyConfiguration(new VaccineDateMap());
             //builder.ApplyConfiguration(new VaccineMap());

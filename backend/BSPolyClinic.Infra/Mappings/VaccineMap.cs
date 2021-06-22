@@ -13,9 +13,8 @@ namespace BSPolyClinic.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Vaccine> builder)
         {
-            builder.ToTable("Vaccine");
-
-            builder.HasKey(v => v.Id);
+            builder.HasKey(v => v.VaccineId);
+            builder.Property(v => v.VaccineId).ValueGeneratedOnAdd();
 
             builder.Property(v => v.Title);
             builder.Property(v => v.Description);

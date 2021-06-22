@@ -22,6 +22,7 @@ namespace BSPolyClinic.Domain.Entities
         public EPhoneType Type { get; private set; }
         public string Observation { get; private set; }
 
+
         public void AlterPhone(string telephone)
         {
             Number = telephone;

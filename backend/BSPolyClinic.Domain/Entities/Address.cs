@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace BSPolyClinic.Domain.Entities
 {
-    [Table("Addresses")]
     public class Address : Entity
     {
         public Address(string street, string number, string complement, string district, string city, string state, string country, string zipCode, string description, EAddressType type)
@@ -24,7 +23,6 @@ namespace BSPolyClinic.Domain.Entities
             Description = description;
             Type = type;
         }
-
         public string Street { get; private set; }
         public string Number { get; private set; }
         public string Complement { get; private set; }
@@ -35,7 +33,6 @@ namespace BSPolyClinic.Domain.Entities
         public string ZipCode { get; private set; }
         public string Description { get; private set; }
         public EAddressType Type { get; private set; }
-
 
         public void InsertDescription(string description)
         {
