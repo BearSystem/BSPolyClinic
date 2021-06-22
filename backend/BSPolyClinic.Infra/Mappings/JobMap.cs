@@ -56,6 +56,15 @@ namespace BSPolyClinic.Infra.Mappings
                     Description = "Enfermeiro(a)"
                 },
 
+                
+                new Job
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Attendant",
+                    NormalizedName = "ATTENDANT",
+                    Description = "Atendente"
+                },
+
 
                 new Job
                 {

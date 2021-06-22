@@ -14,10 +14,13 @@ namespace BSPolyClinic.Domain.Entities
         {
 
         }
-        public Administrator(string code)
+        public Administrator(string code, User user)
         {
             Code = code;
+            UserId = user.Id;
         }
+
+
 
         public string Code { get; private set; }
 

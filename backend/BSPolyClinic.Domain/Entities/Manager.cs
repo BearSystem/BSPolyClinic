@@ -15,9 +15,10 @@ namespace BSPolyClinic.Domain.Entities
 
         }
 
-        public Manager(string code)
+        public Manager(string code, User user)
         {
             Code = code;
+            UserId = user.Id;
         }
 
         public string Code { get; private set; }

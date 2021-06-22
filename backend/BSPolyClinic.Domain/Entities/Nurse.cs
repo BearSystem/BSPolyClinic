@@ -12,10 +12,11 @@ namespace BSPolyClinic.Domain.Entities
     {
         public Nurse() { }
 
-        public Nurse(string code, string crm)
+        public Nurse(string code, string crm, User user)
         {
             Code = code;
             Crm = crm;
+            UserId = user.Id;
         }
 
         public string Code { get; private set; }

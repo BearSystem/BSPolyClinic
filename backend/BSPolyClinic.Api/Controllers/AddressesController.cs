@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BSPolyClinic.Domain.Entities;
+using BSPolyClinic.Infra;
+using BSPolyClinic.Infra.Interfaces;
 
 namespace BSPolyClinic.Api.Controllers
 {
@@ -12,36 +15,98 @@ namespace BSPolyClinic.Api.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-        // GET: api/<AdressesController>
+        private readonly Context _context;
+        private readonly IAddress _address;
+
+
+        public AddressesController(Context context, IAddress address)
+        {
+            _context = context;
+            _address = address;
+        }
+
+        // GET: api/Addresses
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
-            return new string[] { "value1", "value2" };
+            return await _context.Addresses.ToListAsync();
         }
 
-        // GET api/<AdressesController>/5
+        // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Address>> GetAddress(Guid id)
         {
-            return "value";
+            var address = await _context.Addresses.FindAsync(id);
+
+            if (address == null)
+            {
+                return NotFound();
+            }
+
+            return address;
         }
 
-        // POST api/<AdressesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<AdressesController>/5
+        // PUT: api/Addresses/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutAddress(Guid id, Address address)
         {
+            if (id != address.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(address).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AddressExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/<AdressesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST: api/Addresses
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Address>> PostAddress(Address address)
         {
+            _context.Addresses.Add(address);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetAddress", new { id = address.Id }, address);
+        }
+
+        // DELETE: api/Addresses/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAddress(Guid id)
+        {
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
+            {
+                return NotFound();
+            }
+
+            _context.Addresses.Remove(address);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool AddressExists(Guid id)
+        {
+            return _context.Addresses.Any(e => e.Id == id);
         }
     }
 }

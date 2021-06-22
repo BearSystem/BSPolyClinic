@@ -47,6 +47,7 @@ namespace BSPolyClinic.Infra
             //builder.ApplyConfiguration(new ConsultationDateMap());
             //builder.ApplyConfiguration(new ConsultationMap());
             builder.ApplyConfiguration(new DoctorMap());
+            builder.ApplyConfiguration(new JobMap());
             builder.ApplyConfiguration(new HealthCenterMap());
             builder.ApplyConfiguration(new ManagerMap());
             builder.ApplyConfiguration(new MedicalSpecialityMap());

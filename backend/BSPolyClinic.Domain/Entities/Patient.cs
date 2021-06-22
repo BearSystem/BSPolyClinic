@@ -14,9 +14,10 @@ namespace BSPolyClinic.Domain.Entities
         {
 
         }
-        public Patient(string code)
+        public Patient(string code, User user)
         {
             Code = code;
+            UserId = user.Id;
         }
 
         public string Code { get; private set; }

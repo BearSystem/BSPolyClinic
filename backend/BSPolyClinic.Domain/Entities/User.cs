@@ -17,12 +17,12 @@ namespace BSPolyClinic.Domain.Entities
 
         public User(Name name, Document document, Email email, EUserType userType)
         {
+            Id = Guid.NewGuid().ToString();
             Name = name;
             Document = document;
             Emails = email;
             UserType = userType;
         }
-
         public Name Name { get; private set; }
         public Email Emails { get; private set; }
         public Document Document { get; private set; }
@@ -31,6 +31,8 @@ namespace BSPolyClinic.Domain.Entities
         public ICollection<Phone> Phones { get; set; }
         public ICollection<Address> Addresses { get; set; }
 
+        [NotMapped]
+        public string Crm { get; set; }
 
         public void AlterDocument(Document document)
         {

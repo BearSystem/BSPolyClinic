@@ -30,46 +30,46 @@ namespace BSPolyClinic.Infra.Repositories
             try
             {
                 var newUser = await usersManager.CreateAsync(user, senha);
-
+                var newCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
                 switch (user.UserType)
                 {
                     case EUserType.Administrator:
-                        var administrator = new Administrator();
+                        var administrator = new Administrator(newCode, user);
                         administrator.AddCreatedDate();
                         administrator.AddUpdatedDate();
 
                         context.Administrators.Add(administrator);
                         break;
                     case EUserType.Manager:
-                        var manager = new Manager();
+                        var manager = new Manager(newCode, user);
                         manager.AddCreatedDate();
                         manager.AddUpdatedDate();
 
                         context.Managers.Add(manager);
                         break;
                     case EUserType.Doctor:
-                        var doctor = new Doctor();
+                        var doctor = new Doctor(newCode, user.Crm, user);
                         doctor.AddCreatedDate();
                         doctor.AddUpdatedDate();
 
                         context.Doctors.Add(doctor);
                         break;
                     case EUserType.Nurse:
-                        var nurse = new Nurse();
+                        var nurse = new Nurse(newCode, user.Crm, user);
                         nurse.AddCreatedDate();
                         nurse.AddUpdatedDate();
 
                         context.Nurses.Add(nurse);
                         break;
                     case EUserType.Attendant:
-                        var attendant = new Attendant();
+                        var attendant = new Attendant(newCode, user);
                         attendant.AddCreatedDate();
                         attendant.AddUpdatedDate();
 
                         context.Attendants.Add(attendant);
                         break;
                     default:
-                        var patient = new Patient();
+                        var patient = new Patient(newCode, user);
                         patient.AddCreatedDate();
                         patient.AddUpdatedDate();
 

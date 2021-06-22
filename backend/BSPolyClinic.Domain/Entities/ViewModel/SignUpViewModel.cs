@@ -16,8 +16,8 @@ namespace BSPolyClinic.Domain.Entities.ViewModel
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Cpf { get; set; }
+        public string Crm { get; set; }
         public byte[] Foto { get; set; }
-
         public string Password { get; set; }
         public string RepeatPassword { get; set; }
 

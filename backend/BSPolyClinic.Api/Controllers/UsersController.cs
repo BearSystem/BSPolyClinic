@@ -3,9 +3,11 @@ using BSPolyClinic.Domain.Entities;
 using BSPolyClinic.Domain.Entities.ViewModel;
 using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Domain.ValueObjects;
+using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,11 +21,19 @@ namespace BSPolyClinic.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly Context _context;
         private readonly IUser userRepository;
 
-        public UsersController(IUser userRepository)
+        public UsersController(Context context, IUser userRepository)
         {
+            _context = context;
             this.userRepository = userRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        {
+            return await _context.User.ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -77,29 +87,29 @@ namespace BSPolyClinic.Api.Controllers
                 if (await userRepository.GetQuantityRegisteredUresrs() == 0)
                 {
                     singUpUser.TypeUser = EUserType.Administrator;
-                    userRole = "Administrator";
+                    userRole = "ADMINISTRATOR";
                 }
                 else
                 {
                     switch (singUpUser.TypeUser)
                     {
                         case EUserType.Administrator:
-                            userRole = "Administrator";
+                            userRole = "ADMINISTRATOR";
                             break;
                         case EUserType.Manager:
-                            userRole = "Manager";
+                            userRole = "MANAGER";
                             break;
                         case EUserType.Doctor:
-                            userRole = "Doctor";
+                            userRole = "DOCTOR";
                             break;
                         case EUserType.Nurse:
-                            userRole = "Nurse";
+                            userRole = "NURSE";
                             break;
                         case EUserType.Attendant:
                             userRole = "Attendant";
                             break;
                         default:
-                            userRole = "Patient";
+                            userRole = "PATIENT";
                             break;
 
                     }
@@ -115,6 +125,7 @@ namespace BSPolyClinic.Api.Controllers
                 createUser.Email = singUpUser.Email;
                 createUser.PasswordHash = singUpUser.Password;
                 createUser.Foto = singUpUser.Foto;
+                createUser.Crm = singUpUser.Crm;
 
 
                 newUser = await userRepository.CreateUser(createUser, singUpUser.Password);
