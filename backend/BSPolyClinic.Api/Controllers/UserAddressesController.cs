@@ -13,13 +13,13 @@ namespace BSPolyClinic.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class UserAddressesController : ControllerBase
     {
         private readonly Context _context;
         private readonly IAddressUser _address;
 
 
-        public AddressesController(Context context, IAddressUser address)
+        public UserAddressesController(Context context, IAddressUser address)
         {
             _context = context;
             _address = address;

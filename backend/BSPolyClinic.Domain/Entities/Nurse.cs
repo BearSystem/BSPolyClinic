@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BSPolyClinic.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace BSPolyClinic.Domain.Entities
         public int NurseId { get; private set; }
         public string Code { get; private set; }
         public string Crm { get; private set; }
+        public ENurseType Type { get; private set; }
 
         public string UserId { get; set; }
         public User User { get; set; }
