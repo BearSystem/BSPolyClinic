@@ -1,4 +1,5 @@
 ﻿using BSPolyClinic.Domain.Entities;
+using BSPolyClinic.Domain.Entities.ViewModel;
 using BSPolyClinic.Domain.Enums;
 using BSPolyClinic.Infra;
 using BSPolyClinic.Infra.Interfaces;
@@ -73,6 +74,46 @@ namespace BSPolyClinic.Infra.Repositories
                 context.SaveChanges();
 
                 return newUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> CreateUserByChat(User user, string password)
+        {
+            try
+            {
+                var newUser = await usersManager.CreateAsync(user, password);
+                var newCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
+
+                var patient = new Patient(newCode, user);
+                patient.AddUpdatedDate();
+
+                context.Patients.Add(patient);
+                context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> FindUserByCpf(string Cpf)
+        {
+            Boolean userExists = false;
+            try
+            {
+                var user = await context.User.Where(u => u.Document.CPF == Cpf).SingleOrDefaultAsync();
+
+                if (user != null){
+                    userExists = true;
+                }
+
+                return userExists;
             }
             catch (Exception ex)
             {

@@ -26,6 +26,7 @@ namespace BSPolyClinic.Domain.Entities
         public Name Name { get; private set; }
         public Email Emails { get; private set; }
         public Document Document { get; private set; }
+        public DateTime Birthday { get; private set; }
         public EUserType UserType { get; private set; }
         public byte[] Foto { get; set; }
         public virtual ICollection<PhoneUser> PhonesUsers { get; set; }
@@ -42,6 +43,12 @@ namespace BSPolyClinic.Domain.Entities
         public void AlterUserType(EUserType eUserType)
         {
             UserType = eUserType;
+        }
+        
+
+        public void AlterUserBirthday(DateTime date)
+        {
+            Birthday = date;
         }
 
         public void AddEmails(Email email)
